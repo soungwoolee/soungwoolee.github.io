@@ -19,7 +19,7 @@
 | **condition** | negative |     FP     |    TN    |
 
 * ***T(F) + P(N) 표기***는 뒷쪽이 예측, 앞쪽이 실제 True condition 이다
-## 
+<br/>
     * True Positive : positive로 예측하고 실제 값도 positive
     * False Positive : positive로 예측했는데 실제 값은 negative
     * False Negative : negative로 예측했는데 실제 값은 positve
