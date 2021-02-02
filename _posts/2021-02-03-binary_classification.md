@@ -1,8 +1,8 @@
 # <이진분류와 1종, 2종오류>
-# 
+<br/> 
 
 ## 1. Binary Classification
-# 
+<br/> 
 
 ### 1-2) 이진 분류란? 🙄
 
@@ -26,10 +26,10 @@
     * True Negative : negative로 예측하고 실제 값도 negative
 
 * 예를들어, 어떤 질병의 양성과 음성을 가려낼 때 FP는 양성(prediction)으로 예측했는데 실제로 음성인 경우를 뜻한다
-# 
+<br/> 
 
 ***
-# 
+<br/> 
 
 ## 2. Type 1 error, Type 2 error
 
