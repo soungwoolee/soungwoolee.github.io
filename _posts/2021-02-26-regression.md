@@ -567,5 +567,5 @@ expenditure
 - 선형회귀는 예측력이 떨어지지만 독립변수 값이 주어졌을 때 종속변수 값을 쉽게 구할 수 있고 해석에 용이하다.
 
 
-[출처](파이썬을 활용한 이커머스 데이터 분석 올인원 패키지 Online.)
+[출처](https://www.fastcampus.co.kr/data_online_ecommerce)
 
