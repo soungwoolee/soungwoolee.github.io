@@ -327,8 +327,6 @@ sns.pairplot(data)
 
 
     
-![png](regression_files/regression_8_1.png)
-![png](soungwoolee.github.io/images/regression_8_1.png)
 ![png](http://soungwoolee.github.io/images/regression_8_1.png)
 
 
@@ -517,9 +515,8 @@ sns.scatterplot(y_test,predictions)
 
 
 
-    
-![png](regression_files/regression_24_1.png)
-    
+
+![png](http://soungwoolee.github.io/images/regression_24_1.png)    
 
 
 대체로 잘 예측한 모습을 확인할 수 있다.
