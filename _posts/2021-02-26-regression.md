@@ -19,7 +19,6 @@ data = pd.read_csv('ecommerce.csv')
 
 # EDA
 
-
 ```python
 data
 ```
@@ -568,19 +567,4 @@ expenditure
 - 선형회귀는 예측력이 떨어지지만 독립변수 값이 주어졌을 때 종속변수 값을 쉽게 구할 수 있고 해석에 용이하다.
 
 
-```python
-jupyter nbconvert --to markdown 'regression.ipynb'
-```
 
-
-      File "<ipython-input-8-d35521921022>", line 1
-        jupyter nbconvert --to markdown 'regression.ipynb'
-                ^
-    SyntaxError: invalid syntax
-    
-
-
-
-```python
-
-```
