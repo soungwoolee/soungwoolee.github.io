@@ -328,6 +328,7 @@ sns.pairplot(data)
 
     
 ![png](regression_files/regression_8_1.png)
+![png](soungwoolee.github.io/images/regression_8_1.png)
     
 
 
