@@ -16,9 +16,9 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "데이터분석 공부노트"
+title                    : "<데이터분석 공부노트>"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : " 통계 & 머신러닝 기반 데이터 분석 모델링 정리 노트 "
 name                     : "Soungwoo"
 description              : "data analysis with python"
 url                      : "https://soungwoolee.github.io/"
@@ -93,11 +93,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "Andrew Lee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  bio              : "***How to analyze data*** statistic, machine learning"
+  location         : "Seoul"
+  email            : 
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
