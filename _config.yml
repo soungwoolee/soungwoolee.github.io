@@ -206,17 +206,6 @@ sass:
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
   
   
-  
-/*
-   Grid
-   ========================================================================== */
-$right-sidebar-width-narrow: 150px !default;
-$right-sidebar-width: 200px !default;
-$right-sidebar-width-wide: 250px !default;
-// $right-sidebar-width-narrow: 200px !default;
-// $right-sidebar-width: 300px !default;
-// $right-sidebar-width-wide: 400px !default;
-  
 
 
 # Outputting
