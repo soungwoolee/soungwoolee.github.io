@@ -1,6 +1,6 @@
 # 05. 프로모션 효율 예측 (Random Forest 나무로 숲 만들기)
 
-![image.png](attachment:image.png)
+![png](http://soungwoolee.github.io/images/rf.png)
 
 ### Random Forest 는 어떻게 만들어졌을까?
 - Decision Tree model 에서 발생하는 Overfitting 현상 : Train Set에만 잘 작동해서 test set에서 오히려 에러가 커지는 현상이다. 
@@ -1975,8 +1975,8 @@ sns.barplot(x = X_train.columns, y = ft_importance)
 
 
     
-![png](2021-03-06-RandomForest_files/2021-03-06-RandomForest_106_1.png)
-    
+
+![png](http://soungwoolee.github.io/images/2021-03-06-RandomForest_106_1.png)   
 
 
 - num_item, avg_price, total_amount 순서대로 중요하다
