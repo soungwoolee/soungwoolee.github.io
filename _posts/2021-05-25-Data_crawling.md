@@ -19,12 +19,9 @@
 <h3 id="정의-1">정의</h3>
 <p>HTML(HyperText Markup Language) 은 대표적인 마크업 언어이다. <a href="https://ko.wikipedia.org/wiki/%EB%A7%88%ED%81%AC%EC%97%85_%EC%96%B8%EC%96%B4">마크업 언어</a>는 태그 등을 이용하여 '문서나 데이터의 구조를 표현’하는 언어이다.  우리가 알고 있는 웹 페이지가 HTML 문서이며 HTML '태그’들로 이루어져 있다. 이 태그의 구성에 따라 웹페이지의 기능과 디자인이 결정되므로 크롤링 시 추출하고자 하는 데이터가 어떤 태그로 둘러 쌓여 있는지 잘 확인해야 한다.</p>
 <h3 id="tag">TAG</h3>
-<p>실제 사이트에서 html 이 어떻게 동작하는지 알아보자. 예시 사이트는 <a href="https://www.data.go.kr/index.do">공공데이터포털</a>이다.  사이트에 들어가서 윈도우의 경우 F12를 누르거나 도구-&gt; 더보기 -&gt; 개발자 창을 클릭하면 개발자 창을 띄울 수 있다.  이 창에서 우리는 웹사이트의 특정 요소가 어떤 태그로 구성되어 있는지 확인할 수 있다.<br>
-<img src="http://soungwoolee.github.io/images/html_tag.jpg" alt="jpg"><br>
-<br>
-&lt; head&gt; &lt; body&gt;  처럼  &lt;&gt; 괄호로 둘러 쌓인 것들이 TAG 에 해당한다. 복잡한 사이트가 단순히 몇 줄로 이루어진 것처럼 보인다. 하지만  앞 부분의 작은 세모를 클릭해보면 부모 태그의 하위그룹에 해당하는 자식 태그들에 접근할 수 있다.  그리고 태그는 시작태그와 종료태그로 이루어져 있어서 시작태그에서 출발해서 밑단으로 내려갔다가 다시 올라와서 종료 태그로 감싸져 있는 구조라고 이해하면 된다.  종료태그 없이 시작태그가 전부인 경우도 있다. 가령 title tag 의 시작태그는 &lt; title &gt; 종료태그는 &lt; /title&gt; 인 형식이다.
-<br>
-</p>
+<p>실제 사이트에서 html 이 어떻게 동작하는지 알아보자. 예시 사이트는 <a href="https://www.data.go.kr/index.do">공공데이터포털</a>이다.  사이트에 들어가서 윈도우의 경우 F12를 누르거나 도구-&gt; 더보기 -&gt; 개발자 창을 클릭하면 개발자 창을 띄울 수 있다.  이 창에서 우리는 웹사이트의 특정 요소가 어떤 태그로 구성되어 있는지 확인할 수 있다.</p>
+<p><img src="http://soungwoolee.github.io/images/html_tag.jpg" alt="jpg"></p>
+<p>&lt; head&gt; &lt; body&gt;  처럼  &lt;&gt; 괄호로 둘러 쌓인 것들이 TAG 에 해당한다. 복잡한 사이트가 단순히 몇 줄로 이루어진 것처럼 보인다. 하지만  앞 부분의 작은 세모를 클릭해보면 부모 태그의 하위그룹에 해당하는 자식 태그들에 접근할 수 있다.  그리고 태그는 시작태그와 종료태그로 이루어져 있어서 시작태그에서 출발해서 밑단으로 내려갔다가 다시 올라와서 종료 태그로 감싸져 있는 구조라고 이해하면 된다.  종료태그 없이 시작태그가 전부인 경우도 있다. 가령 title tag 의 시작태그는 &lt; title &gt; 종료태그는 &lt; /title&gt; 인 형식이다.</p>
 <p><img src="http://soungwoolee.github.io/images/html_tag_2.jpg" alt="jpg"></p>
 <p>사이트에서 데이터를 검색할 수 있는 요소가 우측의 개발자 창에서 파란색으로 선택되어 있는 부분이다. 맨 위의 &lt; body&gt; tag 에서 하위로 내려온 것을 확인할 수 있다. 그렇다면 파란색으로 선택된 &lt; div class=“main-section-search” &gt; 에서 div, class, main-section-search 각각의 역할을 알아보자</p>
 <h3 id="element-요소">Element (요소)</h3>
