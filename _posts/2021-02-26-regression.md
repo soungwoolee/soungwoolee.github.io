@@ -1,3 +1,20 @@
+---
+title : Regression
+excerpt : 회귀분석으로 고객의 지출액 
+categories:
+   - Machine Learning
+tags:
+   - Machine Learning
+   - Data Analysis
+   - Classification
+   - Python
+   - Linear
+   - Regression
+   - sns plot
+   - MSE
+
+---
+{{{files.0.content.text}}}
 # 01. 고객 연간 지출액 예측 (Linear Regression)
 # Data load
 
