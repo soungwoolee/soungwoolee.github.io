@@ -1,6 +1,10 @@
 ---
 title : "Data_crawling"
 excerpt : "크롤링의 뜻과 html 기초 배경지식"
+toc: true
+toc_sticky: true
+header:
+  teaser: /images/crawling_img/jpg
 categories:
    - Web Crawling
 tags:
@@ -12,6 +16,7 @@ tags:
    -   Selenium
    -    BeautifulSoup
 ---
+
 
 # Web Scraping( data crawling )
 ## 정의
