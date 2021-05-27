@@ -1,3 +1,19 @@
+---
+title : Binary Classification
+excerpt : 이진분류와 1종오류, 2종오류
+categories:
+   - Machine Learning
+tags:
+   - Machine Learning
+   - Data Analysis
+   - Classification
+   - Python
+   - Binary Classification
+   - Type 1 error
+   - Type 2 error
+
+---
+{{{files.0.content.text}}}
 # <이진분류와 1종, 2종오류>
 <br/> 
 
