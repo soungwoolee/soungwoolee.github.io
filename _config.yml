@@ -96,7 +96,8 @@ analytics:
 author:
   name             : "Andrew Lee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "***How to analyze data*** statistic, machine learning"
+  bio              : "생존코딩" <br>
+  How to analyze data, statistic, machine learning"
   location         : "Seoul"
   email            : 
   links:
