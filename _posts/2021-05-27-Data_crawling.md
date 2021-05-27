@@ -1,3 +1,12 @@
+---
+title : "Data_crawling"
+excerpt : "크롤링의 뜻과 html 기초 배경지식"
+categories:
+   - Web Crawling
+tags:
+   - WebCrawling, Scraping, DataAnalysis, html, Python, Selenium, BeautifulSoup
+---
+
 # Web Scraping( data crawling )
 ## 정의
 **웹 스크래핑**은 웹 사이트의 원하는 정보를 추출하는 것을 뜻한다. 한편 **웹 크롤러**는 스크래핑 방법의 일종으로 ***자동화, 조직화된 방법*** 으로 원하는 데이터를 추출하는 것을 의미한다. 가령 항공사 홈페이지에서 특정 날짜의 비행기 티켓 가격 정보를 일회적으로 수집할 경우, 이는 웹 스크래핑에 해당한다. 반면 여러 날짜의 비행기 티켓 정보를 주기적으로 수집하려 한다면 자동화된 프로그램이 필요할 것이고 이는 크롤링에 가깝다. (크롤링이 더 좁은 의미의 개념이지만 혼용해서 사용하겠다.)
