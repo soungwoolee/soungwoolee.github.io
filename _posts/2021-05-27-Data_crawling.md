@@ -4,7 +4,13 @@ excerpt : "크롤링의 뜻과 html 기초 배경지식"
 categories:
    - Web Crawling
 tags:
-   - WebCrawling, Scraping, DataAnalysis, html, Python, Selenium, BeautifulSoup
+   - WebCrawling
+   -  Scraping
+   -  DataAnalysis
+   -   html
+   -   Python
+   -   Selenium
+   -    BeautifulSoup
 ---
 
 # Web Scraping( data crawling )
