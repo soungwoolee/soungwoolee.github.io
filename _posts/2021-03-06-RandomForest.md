@@ -1,3 +1,23 @@
+---
+title : RandomForest
+excerpt : RandomForest로 구매율 예측하기
+categories:
+   - Machine Learning
+tags:
+   - Machine Learning
+   - Data Analysis
+   - Classification
+   - Python
+   - Random Forest
+   - Regressor
+   - Bagging
+   - Feature Importance
+   - Merge
+   - Join
+   - Grid Search
+
+---
+{{{files.0.content.text}}}
 # 05. 프로모션 효율 예측 (Random Forest 나무로 숲 만들기)
 
 ![png](http://soungwoolee.github.io/images/rf.png)
