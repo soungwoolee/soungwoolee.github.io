@@ -31,7 +31,7 @@ masthead_title           : # overrides the website title displayed in the masthe
 words_per_minute         : 200
 comments:
   provider               :  "disqus" #블로그 댓글 기능 false(defualt)"discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
-  disqus:
+  disqus: True
     shortname            : "https-soungwoolee-github-io" # 블로그 댓글기능 shortname
     
   discourse:
