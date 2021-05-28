@@ -15,7 +15,7 @@
 minimal_mistakes_skin    : "dark" #"default" "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "ko-KR"
+locale                   : "en-US"
 title                    : "What's up Data"
 title_separator          : "-"
 subtitle                 : " 통계 & 머신러닝 기반 데이터 분석 모델링 정리 노트 "
@@ -97,8 +97,7 @@ analytics:
 author:
   name             : "Andrew Lee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : 생존코딩 Coding to survive <br>
-  How to analyze data, statistic, machine learning"
+  bio              : 생존코딩 Coding to survive, How to analyze data, statistic, machine learning"
   location         : "Seoul"
   email            : 
   links:
