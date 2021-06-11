@@ -1,4 +1,3 @@
-
 ---
 title : "Data_crawling2"
 excerpt : "request,selenium, beautifulsoup 으로 공공데이터 텍스트 긁어오기"
