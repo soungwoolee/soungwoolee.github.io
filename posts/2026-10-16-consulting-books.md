@@ -1,71 +1,74 @@
 ---
-title: 5년 차 컨설턴트가 다시 꺼내 본 주니어 시절 경영서 네 권
+title: The four books that got me through my first year of consulting, and what still holds up
 date: 2026-10-16
-lang: ko
-description: 컨설팅 1년 차에 읽은 경영서 네 권을 5년 차에 다시 펼쳤다. 실무에서 통한 것, 늪에 빠졌던 경험, 그리고 AI가 들어온 뒤 남는 것.
+lang: en
+description: Four books I read to survive my first year of consulting, reread five years in: what held up, the swamp of data without a hypothesis, and what's left once AI does the mechanics.
+image: img/posts/consulting-books.png
 ---
 
-『로지컬 라이팅』, 『페르미 추정 두뇌 활용법』, 『가설사고, 생각을 뒤집어라』, 『맥킨지, 차트의 기술』
+![Hundreds of grey account cells, a magnifying glass, and ten picked out into a neat stack](img/posts/consulting-books.png)
 
-## 장표 한 장을 들고 반나절을 보냈다
+The books: [*Logical Writing*](https://www.yes24.com/Product/Goods/76899650) by Hanako Teruya, [*Fermi Estimation*](https://www.yes24.com/Product/Goods/5312935) by the Tokyo University Case Study Club, [*Hypothesis Thinking*](https://str.toyokeizai.net/en/books/9784492555552/) by Kazunari Uchida, and [*Say It with Charts*](https://www.amazon.com/Say-Charts-Executives-Visual-Communication/dp/007136997X) by Gene Zelazny. The first three are Japanese books I read in Korean translation.
 
-1년 차 때 일이다. 장표를 한 장 만들라는 말을 듣고 반나절 동안 빈 화면만 보고 있었다. 혼난 것도 아니고, 내용이 어려운 것도 아니었다. 무슨 말을 써야 할지 몰랐다. 이 장표로 무엇을 말할지, 그걸 어떤 순서로 보여 줄지 한 번도 생각해 본 적이 없었다.
+## Half a day, one blank slide
 
-컨설팅은 기업이 의사결정을 할 때 근거가 되는 분석과 의견을 내는 일이다. 그런데 나는 분석 방법론도, 가설을 세우는 법도, 숫자를 추정하는 법도, 장표를 그리는 법도 제대로 배운 적이 없었다. 대학 때 경영학회를 한 동기들은 이런 훈련이 몸에 배어 있었다. 빨리 따라잡고 싶어서 2023년 1월부터 두 달 동안 네 권을 연달아 읽고 블로그에 서평을 남겼다.
+In my first year, someone asked me for a single slide. I sat in front of an empty screen for half a day. Nobody was yelling at me. ==I just had no idea what to write.== I'd never stopped to ask what a slide was supposed to say, let alone in what order.
 
-5년 차가 된 지금 그 서평들을 다시 읽어 봤다. 실무에서 그대로 쓴 것도 있고, 책에서 읽을 때보다 훨씬 어려웠던 것도 있다.
+A lot of my peers had spent university in consulting clubs, and it showed. They knew how to build a hypothesis, size a number, and lay out a deck. I didn't. So in early 2022 I read four books back to back over two months and reviewed each one on my blog.
 
-## "MECE하게"는 결과고, 실제로 하는 일은 추상도를 맞추는 것이다
+Five years in, I went back and reread those reviews. Some of it I still use word for word. Some of it turned out a lot harder than it looked on the page.
 
-『로지컬 라이팅』에서 처음 제대로 배운 게 MECE다. 중복 없이, 빠짐없이. 프로젝트 범위를 정할 때부터 보고서 목차를 짤 때까지 안 쓰이는 데가 없다.
+## "Make it MECE" isn't an instruction
 
-그런데 "MECE하게 정리해 와"라는 말은 조금 어폐가 있다. 중복 없고 빠짐없는 건 정리가 끝난 뒤의 상태다. 어떻게 그렇게 만드는지는 말해 주지 않는다. 실제로 해 보면 대부분 추상도에서 틀린다. 산업을 농업, 광업, 도소매, 정보통신, 서비스업으로 나눴는데 그 사이에 인테리어업이 끼어 있으면 바로 이상하다. 한 단계 아래 개념이 섞인 것이다. 이 예시는 쉽지만, 현업에서는 레벨이 애매한 경우가 훨씬 많다.
+*Logical Writing* is where I first really learned MECE, short for mutually exclusive, collectively exhaustive. In plain terms: no overlaps, no gaps. I use it everywhere, from scoping a project to deciding what goes on a single page.
 
-가전사 고객 생애가치 프로젝트에서 고객을 어떻게 나눌지 오래 고민했다. 일반 유통에서 산 고객, 자사몰 고객, 가전 앱을 쓰는 고객, 스마트TV 고객이 서로 겹치고 앞뒤 관계도 있었다. 결국 기준은 이 분류로 무엇을 할지에서 나왔다. 펼쳐 놓으면 복잡해도, 마지막에는 듣는 사람이 한 번에 알아들을 만큼 단순해야 좋은 분류였다.
+The trouble is that =="make it MECE" describes the finished list, not how to get there.== In my experience, most lists fail on level. Say you split industries into agriculture, mining, retail, IT and services, then add interior design. Interior design sits inside services, one level down, so the list no longer splits cleanly. That one is easy to spot. On real projects, the levels are rarely that obvious.
 
-이 구분을 신경 쓰는 사람과 안 쓰는 사람은 차이가 크다. 신경 쓰지 않으면 줄 하나 어긋나는 것보다 훨씬 근본적으로 틀린 이야기를 하게 된다. 반대로 구조를 잘 잡는 사람은 큰 범위를 보고 있다는 뜻이라, 한곳에 빠지지 않고 우선순위도 잘 정한다. MECE는 할 말이 많아서 따로 써 보려고 한다.
+On a customer lifetime value project for an appliance maker, I went back and forth for a long time on how to group customers. Some bought through retailers, some on the company's own store, some used its app, some used its smart TVs. The groups overlapped, and customers moved between them over time. ==What settled it was what we needed the grouping for.== It could be messy while we worked it out, but the version we showed had to make sense in one read.
 
-## 게스티메이션은 면접 때만 하는 게 아니었다
+Mixing levels is a bigger problem than a misaligned row on a slide, because the logic underneath stops holding. And people who get levels right usually see the full scope of a problem, so they don't get lost in one corner and are better at deciding what comes first. [MECE got its own post](../mece/).
 
-『페르미 추정 두뇌 활용법』은 면접 준비용 책이라고 생각했다. 실무에서 "여의도역 스타벅스 하루 매출" 같은 문제를 받을 일은 없다. 그런데 숫자를 차곡차곡 쌓아서 예측하는 일은 거의 매일 한다. 고객 생애가치 프로젝트에서 개별 고객의 구매 내역으로 앞으로의 매출을 예측한 것도, 마진 변동이 주로 어느 계정에서 나오는지 먼저 짐작해 본 것도 같은 방식이었다.
+## Estimation didn't stay in the interview room
 
-이 책에서 가장 오래 남은 건 전제와 팩트를 나눠서 적는 습관이다. 전제가 있다는 걸 숨길 필요는 없었다. 어떤 가정 위에서 계산했는지 로직만 정확히 남겨 두면 대부분 문제가 없었다.
+I assumed *Fermi Estimation* was interview prep. No client has ever asked me how many lattes a Starbucks sells in a day. But building a number up piece by piece is something I do all the time. Forecasting revenue from each customer's purchase history was exactly that. So was guessing which accounts were behind a swing in margin before we'd looked.
 
-## 차트 제목은 위치보다 메시지가 있느냐가 중요했다
+What stuck with me was ==keeping assumptions and facts on separate lines.== Assumptions don't need hiding. If the logic was written down, that was almost always enough.
 
-『맥킨지, 차트의 기술』은 주제형 제목 대신 메시지형 제목을 쓰라고 한다. "A사 5년 매출 변화" 대신 "A사 매출은 5년째 늘고 있다"처럼. 실무에서는 경우에 따라 다르다. 제목이 길면 읽다가 차트로 못 넘어가서, 키워드만 보여 주길 원하는 고객도 있다. 그건 스타일 차이다. 메시지가 장표 어딘가에는 꼭 들어가 있어야 한다는 건 그대로였다.
+## Every chart needs a point, even if the title doesn't spell it out
 
-어려운 건 그 메시지를 뽑는 일이다. 단순한 그래프 하나를 보고 이게 무엇을 뜻하는지, 왜 이렇게 됐는지를 한 문장으로 말하는 것. 5년 차인데도 아직 어렵고, 그래서 재밌다.
+*Say It with Charts* says to title a chart with the point, not the topic: "A's revenue has grown five years in a row," not "A's revenue, last five years." Some clients find long titles get in the way and want keywords instead. The point still has to be on the page somewhere.
 
-## 가설 없이 데이터를 열면 늪에 빠진다
+==The hard part is finding the point.== Looking at a plain chart and saying in one sentence what it means and why. I still find that hard, which is probably why I still enjoy it.
 
-네 권 중 가장 몸으로 배운 건 『가설사고』다. 정보가 부족할 때 먼저 임시 답을 세우고, 그걸 확인하는 데 필요한 정보만 모으라는 책이다. 3년 전 서평에 "가설 없이 데이터만 정리하다 보면 늪에 빠진 듯한 느낌이 든다"고 썼는데, 그 뒤로도 그 늪에 몇 번이고 다시 빠졌다.
+## Without a hypothesis, data is a swamp
 
-고객 생애가치 프로젝트 초반에는 목적 없이 테이블을 하나씩 열어 봤다. 어떤 고객이 다음에 무엇을 살지에 대한 가설이 없으니, 모든 테이블을 뒤지는 일이 끝없이 답답했다. "TV를 두 대 이상 산 고객은 큰 냉장고도 살 것이다" 같은 가설이 있어야 어떤 테이블을 볼지 정해졌다.
+The book I learned the most from, mostly the hard way, was *Hypothesis Thinking*. ==Start with a working answer, then collect only what you need to test it.== Back in 2023 I wrote that sorting through data without a hypothesis felt like sinking into a swamp. I've been back in that swamp plenty of times since.
 
-자동차 부품사 프로젝트에서도 같은 일이 있었다. 처음에는 시스템마다 어떤 데이터가 있는지 펼쳐 보기만 했고, 막막했다. "마진 변동의 대부분은 몇몇 계정으로 설명될 것"이라는 가설을 세우고 나서야 그걸 확인할 데이터에만 집중할 수 있었다. 실제로 300여 개 계정 중 10개가 마진 변동의 70%를 설명했다.
+Early in the lifetime value project, I opened table after table with nothing to look for. With no idea what a customer might buy next, it was exhausting. It took a hypothesis like "people who own two or more TVs will buy a big fridge" before I knew which tables mattered.
 
-데이터만 그런 것도 아니다. 장표에 정보를 많이 넣을수록 엮어서 전달하기 어렵고, 말이 길어질수록 힘이 빠진다. 그래서 요즘은 데이터 플랫폼을 설계할 때도 이걸로 풀려는 문제가 무엇인지, 경영 목표가 무엇인지부터 묻는다.
+An auto parts project went the same way. At first I just poked through every system to see what was there, and got nowhere. Once we had a hypothesis, that a handful of accounts drove most of the margin swings, I knew exactly what data to pull. In the end, ==10 out of 300-plus accounts explained 70% of the variance.==
 
-## 그런데 이 기술들을 이제 AI가 더 잘한다
+The same goes for slides: the more you put on one, the less lands. Even when I design a data platform now, I start with what problem it's for and what the business is aiming at.
 
-여기까지 쓰고 보니, 3년 동안 익힌 것 상당수를 이제 AI가 더 잘한다. 테이블을 하나씩 열어 보고, 숫자를 정리하고, 그래프를 그리는 일은 AI가 나보다 꼼꼼하고 빠르다. 반나절 동안 장표 앞에 앉아 있던 1년 차가 지금 입사했다면 AI에게 초안부터 받았을 것이다.
+## Then AI got better at all of it
 
-가설을 세우고 추상도를 판단하는 일은 아직 사람이 더 잘한다. 하지만 이것도 시간문제라고 본다. 얼마 전까지는 AI가 일하는 틀을 촘촘하게 짜 주는 하네스 엔지니어링이 화제였는데, 모델이 눈치가 빨라지면서 그 의미도 금방 줄었다. 기술 하나로 버틸 수 있는 시간이 점점 짧아지고 있다.
+==AI now beats me at a lot of what I spent those years learning.== Combing through tables, cleaning up numbers, drawing charts: it's faster and more thorough. Starting today, I'd ask AI for a first draft instead of losing half a day to that slide.
 
-## 남는 건 무엇을 위해 보느냐다
+Coming up with hypotheses and judging the right level of abstraction are still mostly human jobs. I don't expect that to last. Not long ago everyone was talking about harness engineering, writing detailed rules and context so AI works the way you want. Then the models got better at figuring out what you meant, and it mattered a lot less, fast. Any one skill stays useful for less time than it used to.
 
-그럼 네 권은 이제 쓸모가 없을까. 다시 읽어 보니 오히려 지금 더 필요한 책들이었다.
+## What AI can't decide for you
 
-반나절 동안 장표를 못 쓴 건 차트 그리는 법을 몰라서가 아니었다. 이 장표로 누구에게 무엇을 말할지 몰라서였다. 보고서는 혼자 출판하는 글이 아니라 의사결정자에게 보내는 편지에 가깝다. 그래서 읽는 사람이 어떻게 반응하길 바라는지부터 정해야 한다. 『로지컬 라이팅』이 첫 장부터 한 이야기다.
+So are these books obsolete?
 
-AI와 일할 때도 똑같다. 내가 원하는 걸 정확히 전하고, AI가 같은 방향으로 가게 해야 한다. 결국 실제 행동으로 이어지는 문제가 무엇인지 붙잡는 훈련이 가장 오래 쓸모 있을 것 같다.
+I didn't freeze on that slide because I couldn't draw a chart. ==I froze because I didn't know what I was trying to say, or who it was for.== A report is closer to a letter to whoever has to make the call, so you start with how you want them to react. That's the first chapter of *Logical Writing*.
 
-AI를 쓰는 사람과 안 쓰는 사람의 효율 차이는 이미 엄청나다. 그래서 둘 다 하려고 한다. AI는 AI대로 잘 쓰고, 그와 별개로 내 판단력도 계속 키운다. 1년 차에 읽은 이 네 권은 두 번째 일에 아직 가장 쓸모 있는 책들이다.
+Working with AI is no different. You have to tell it exactly what you want and keep it pointed in that direction. ==Staying on the problem that actually needs a decision== is the skill I expect to last.
 
-## 후배에게 추천하는 순서
+The gap between people who use AI well and people who don't is already huge. So I'm doing both: getting good at using it, and sharpening my own judgment. For the second part, the four books I read in my first year are still the ones I'd reach for.
 
-1. 『가설사고, 생각을 뒤집어라』: 데이터를 열기 전에 먼저 읽을 책
-2. 『로지컬 라이팅』: 장표 한 장을 앞에 두고 막막할 때
-3. 『맥킨지, 차트의 기술』: 메시지가 정해진 다음에
-4. 『페르미 추정 두뇌 활용법』: 숫자를 쌓는 감각이 필요할 때
+## Where I'd tell a junior to start
+
+1. *Hypothesis Thinking*, before you open any data
+2. *Logical Writing*, when you're staring at a blank slide
+3. *Say It with Charts*, once you know your point
+4. *Fermi Estimation*, when you need a feel for building numbers up

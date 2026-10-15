@@ -24,6 +24,8 @@ FONTS = '''<link rel="preconnect" href="https://fonts.googleapis.com">
 def inline(t):
     t = html.escape(t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+    t = re.sub(r"==(.+?)==", r"<mark>\1</mark>", t)
+    t = re.sub(r"(?<![\w*])\*([^*]+?)\*(?![\w*])", r"<i>\1</i>", t)
     t = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', t)
     return t
 
@@ -203,6 +205,9 @@ def build_why():
 
 POST_CSS = """
 /* writing */
+.post mark{background:linear-gradient(transparent 55%,#ffe58a 55%);color:inherit;padding:0 2px}
+:root[data-theme="dark"] .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}}
 .topbar.simple{display:flex;gap:20px;padding:14px max(16px,calc((100% - 1120px)/2));border-bottom:1px solid var(--rule);background:var(--bg);font-family:var(--mono);font-size:13px;position:sticky;top:0;z-index:5}
 .topbar.simple a{color:var(--ink-2);text-decoration:none}.topbar.simple a:hover{color:var(--accent)}
 .post-list{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:4px}
