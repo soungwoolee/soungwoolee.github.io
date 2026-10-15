@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Soungwoo Lee</title>
+<meta name="description" content="Soungwoo Lee, data and business consultant. Why Palantir, selected work, and side projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<!--BODY-->
+<nav class="topbar" aria-label="Sections">
+  <a href="#why">why-palantir</a><a href="#work">work</a><a href="#side">side</a>
+</nav>
+<div class="shell">
+  <aside class="rail" aria-label="Contents">
+    <div class="root">~/soungwoo/</div>
+    <ul id="toc">
+      <li><a href="#top">readme<span class="t">.md</span></a></li>
+      <li><a href="#why">why-palantir<span class="t">.md</span></a></li>
+      <li><a href="#work">work/</a></li>
+      <li class="sub"><a href="#w-margin">margin-accounts</a></li>
+      <li class="sub"><a href="#w-clv">clv</a></li>
+      <li class="sub"><a href="#w-d2c">d2c-lead-time</a></li>
+      <li class="sub"><a href="#w-context">team-context</a></li>
+      <li><a href="#side">side/</a></li>
+      <li class="sub"><a href="#s-wedding">pre-wedding</a></li>
+      <li class="sub"><a href="#s-pauze">pauze-trip</a></li>
+    </ul>
+    <div class="foot">
+      <button class="theme-toggle" id="themeBtn" type="button">Toggle theme</button>
+      <div style="margin-top:10px">Updated Oct 2026</div>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero col" id="top">
+      <div class="name"><b>Soungwoo Lee</b><span>Senior Consultant, EY Consulting Korea</span><span>Applicant · Deployment Strategist, Palantir Seoul</span></div>
+      <h1>I build strategy from data and help companies <em>make better decisions</em>.</h1>
+    </section>
+
+    <!-- WHY PALANTIR -->
+    <section class="col why" id="why">
+      <span class="eyebrow">why-palantir.md</span>
+      <h2>Why Palantir</h2>
+<h3 class="essay-h">Palantir built its platform where a wrong decision costs the most</h3>
+<p>Palantir started by building software for U.S. defense and intelligence agencies, where acting on the wrong data can cost lives. The ontology sits at the center of that approach: one model of an organization&#x27;s data, logic and actions that both people and AI can work from. Palantir has since taken the same approach to companies through Foundry and AIP. In 2026 the U.S. Army folded 75 separate contracts into a single enterprise agreement with Palantir, and Palantir&#x27;s U.S. commercial revenue more than doubled year over year. Few companies have proven this in both government and industry, and I want to help bring it to Korean enterprises.</p>
+<h3 class="essay-h">AI helps a business only when it is connected to how the business decides</h3>
+<p>Palantir&#x27;s post &quot;Connecting AI to Decisions with the Palantir Ontology&quot; says AI is useful to a business only when it is connected to real data, the logic behind it, and the actions people take. My last project showed me why. <a href="#w-margin">An auto parts manufacturer</a> wanted an early warning system for profit, and most of the work came before any AI: what data the company had, how it was collected, and how it tied to profit. We mapped 309 cost accounts and found ten that explained 70.8% of the margin variance.</p>
+<h3 class="essay-h">The CEO&#x27;s chatbot showed me what happens without an ontology</h3>
+<p>The CEO was already asking an AI chatbot about reports, one file at a time, and kept quoting its answer from an old report even after we brought a newer one. Without a model of the business underneath, the chatbot could only talk about whatever file it was given. That was the moment I understood why the ontology matters.</p>
+<h3 class="essay-h">A Deployment Strategist does the work I have been doing as a consultant</h3>
+<p>For five years I have defined client problems in business terms and designed the data behind the answer.</p>
+<ul>
+<li><b><a href="#w-clv">Reconstructing the data model</a>:</b> On a customer lifetime value engagement we had no direct access to the client&#x27;s database. By giving AI the business context, I rebuilt the data model so the client and our team could see how their data connected.</li>
+<li><b><a href="#w-d2c">Designing data for a new platform</a>:</b> For a global smartphone manufacturer&#x27;s U.S. D2C platform, I defined target data structures, source-to-target mapping and purchase-journey data flows.</li>
+<li><b><a href="#s-wedding">Testing market demand</a>:</b> For a pre-wedding party service, I built the landing page, sign-up form and a customer chatbot myself, without a developer.</li>
+</ul>
+<p>I want to do this work full time with Korean enterprises, on a platform built to connect their data to their decisions.</p>
+    </section>
+
+    <!-- WORK -->
+    <section class="wide" id="work">
+      <span class="eyebrow">work/</span>
+      <h2>Each project started by structuring the problem and ended with a number that moved</h2>
+
+      <article class="work" id="w-margin">
+        <div class="work-head">
+          <div><span class="tag eyebrow">2026 · Automotive parts manufacturer · 60 months of P&amp;L, 2021–2025</span>
+          <h3>Narrowed 309 cost accounts to 10 account groups that explain 70.8% of margin variance</h3></div>
+          <div class="stats"><div class="stat"><div class="v">70.8%</div><div class="l">of margin variance from 10 account groups</div></div><div class="stat"><div class="v">309</div><div class="l">cost accounts screened</div></div></div>
+        </div>
+        <div class="two">
+          <div class="panel">
+            <div class="ttl">How the problem was structured</div>
+            <div class="tree">
+              <div class="node"><b>Operating profit</b><small>Too far from any lever to analyze directly</small></div>
+              <div class="arrow">↓ split</div>
+              <div class="row">
+                <div class="node"><b>Revenue</b><small>Set by order volume. Fixed within the month</small></div>
+                <div class="node hl"><b>Margin rate</b><small>Moves with costs. The lever to watch</small></div>
+              </div>
+              <div class="arrow">↓ rank 309 accounts by contribution to margin variance</div>
+              <div class="node hl"><b>10 account groups explain 70.8%</b><small>Ranked by contribution, not by amount</small></div>
+              <div class="arrow">↓ separate</div>
+              <div class="row">
+                <div class="node"><b>Formula-linked</b><small>Correlated with margin by definition, so not interpreted</small></div>
+                <div class="node"><b>Improvement targets</b><small>Labor and outsourced processing</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ttl">Ten of 263 account groups explain 70.8% of margin variance</div>
+            <div class="chart" id="chart-cum"></div>
+            <p class="cap">309 accounts were merged into 263 groups so that offsetting entries cancel out. Hover a point for the account.</p>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <div class="ttl">Each account group placed by the size of its monthly swing and how closely it moves with margin</div>
+          <div class="chart" id="chart-quad"></div>
+          <p class="cap">Accounts were compared by how much they moved, not by their amounts. Production bonuses are a third the size of machinery depreciation, yet contribute four times as much to margin variance.</p>
+        </div>
+              <details class="more">
+          <summary>Why the analysis targeted margin: monthly profit, 2021–2025</summary>
+          <div class="inner">
+        <div class="panel">
+          <div class="ttl">Hold margin at its five-year average and the monthly profit line goes almost flat</div>
+          <div class="chart" id="chart-profit"></div>
+          <p class="cap">Production profit by month, KRW billions. Actual profit swung by 1.4bn a month (one standard deviation); with margin held at its 0.9% average, revenue changes alone would have moved it by 0.04bn. So the analysis targeted margin.</p>
+        </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="work" id="w-clv">
+        <div class="work-head">
+          <div><span class="tag eyebrow">2025 – 2026 · Global home appliance manufacturer</span>
+          <h3>Moved marketing budget to repeat customers, who spend 30% more and cost a third as much to acquire</h3></div>
+          <div class="stats"><div class="stat"><div class="v">+20%</div><div class="l">pilot campaign ROI</div></div><div class="stat"><div class="v">+20%</div><div class="l">repeat customers vs. last year, campaign period</div></div></div>
+        </div>
+        <div class="two">
+          <div class="panel"><div class="ttl">Repeat vs. new customers, indexed to new = 100</div><div class="chart" id="chart-clv-index"></div></div>
+          <div class="panel">
+            <div class="ttl">From hypothesis to budget</div>
+            <div class="flow">
+              <div class="node"><b>Hypothesis</b><small>Repeat customers are more efficient than new ones</small></div>
+              <div class="arrow">↓</div>
+              <div class="node"><b>Customer data mart in SQL</b><small>New, single repurchase, and cross-purchase customers</small></div>
+              <div class="arrow">↓</div>
+              <div class="node"><b>30+ scenarios</b><small>Started from the markets and segments with the most revenue at stake, not all 40</small></div>
+              <div class="arrow">↓</div>
+              <div class="node hl"><b>Budget approved by the business unit</b><small>Pilot ROI +20%, repeat customers +20%</small></div>
+            </div>
+          </div>
+        </div>
+        <details class="more">
+          <summary>More from this project</summary>
+          <div class="inner">
+            <div class="panel"><div class="ttl">Repurchase segments earn more per customer than first purchases in the same category</div><div class="chart" id="chart-clv-bubbles"></div><p class="cap">One market, 24 segments. Bubble size is total CLV. Market name withheld.</p></div>
+            <div class="panel"><div class="ttl">Under 1% of visitors bought, and the rate varied nearly eightfold by channel</div><div class="chart" id="chart-clv-channels"></div></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="work" id="w-d2c">
+        <div class="work-head">
+          <div><span class="tag eyebrow">2023 – 2025 · Global smartphone manufacturer, D2C</span>
+          <h3>Merged fragmented reviews across 40+ subsidiaries and cut development lead time by 12%</h3></div>
+          <div class="stats"><div class="stat"><div class="v">−12%</div><div class="l">development lead time</div></div><div class="stat"><div class="v">40+</div><div class="l">subsidiaries</div></div></div>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <div class="ttl">Every development request from regional subsidiaries passed through HQ</div>
+          <div class="chart" id="chart-map"></div>
+          <p class="cap">Regions shown for illustration.</p>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <div class="ttl">I classified the causes of delay by type, then merged the review steps that added time without adding decisions</div>
+          <div class="proc">
+            <div class="lane"><b>Before</b><span class="st jira">To Do</span><span class="ar">→</span><span class="st jira rev">Business Review</span><span class="ar">→</span><span class="st jira rev">PO Review</span><span class="ar">→</span><span class="st jira rev">Tech Review</span><span class="ar">→</span><span class="st jira">In Progress</span><span class="ar">→</span><span class="st jira">QA</span><span class="ar">→</span><span class="st jira done">Done</span></div>
+            <div class="lane"><b>After</b><span class="st jira">To Do</span><span class="ar">→</span><span class="st jira merged">Joint Review</span><span class="ar">→</span><span class="st jira">In Progress</span><span class="ar">→</span><span class="st jira">QA</span><span class="ar">→</span><span class="st jira done">Done</span></div>
+            <p class="cap" style="margin:4px 0 0">Jira workflow statuses. Business, PO and tech reviews ran one after another; they were combined into a single joint review.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="work" id="w-context">
+        <div class="work-head">
+          <div><span class="tag eyebrow">CLV project</span>
+          <h3>Built shared AI context so the whole team analyzed with the same definitions</h3></div>
+        </div>
+        <div class="files" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px">
+          <div class="file"><div class="fn"><span>Definitions</span><span>rule</span></div><div class="fc">A TV and soundbar bought together is a bundle, not a cross-purchase.</div></div>
+          <div class="file"><div class="fn"><span>Procedures</span><span>skill</span></div><div class="fc">Ask what the analysis is for before writing any query. Reuse the 229-line customer-flow query skeleton.</div></div>
+          <div class="file"><div class="fn"><span>Guardrails</span><span>rule</span></div><div class="fc">Never edit code the team has signed off. Write a new version instead.</div></div>
+        </div>
+        <p class="cap" style="margin-top:12px;font-size:14px;color:var(--ink-2)">We had no direct access to the client's database, so consistent definitions mattered more than usual. Nobody had to redo the same correction twice, and the team agreed on one meaning for every customer type.</p>
+      </article>
+    </section>
+
+    <!-- SIDE -->
+    <section class="wide" id="side">
+      <span class="eyebrow">side/</span>
+      <h2>Outside work, I build and run things people show up for</h2>
+
+      <article class="side" id="s-wedding">
+        <div class="gallery" style="margin-top:0;align-self:start;grid-template-columns:1fr 1fr">
+          <figure class="shot big"><img src="../../img/wedding-1.jpg" alt="The couple at the group pre-wedding party on a rooftop" loading="lazy"><figcaption><span>The first party, for a friend's couple</span></figcaption></figure>
+          <figure class="shot big"><img src="../../img/invito_landing.jpg" alt="Landing page of the platform" loading="lazy"><figcaption><span>Landing page</span></figcaption></figure>
+        </div>
+        <div>
+          <span class="eyebrow">2026 · Pre-wedding party platform</span>
+          <h3>Turning twenty separate pre-wedding dinners into one party</h3>
+          <p class="live-link"><a href="https://invito-app.netlify.app/" target="_blank" rel="noopener">Visit the live site ↗</a></p>
+          <div class="wwl">
+            <div><b>What</b><p>A service that plans and runs one group party for couples before their wedding. The first one was a rooftop wine bar party for a friend's couple: a team quiz about the bride and groom, tacos from the restaurant they went to as students, and one photo board instead of flowers. I then built the landing page, the sign-up form linked to Google Sheets, custom quote pages, and a Claude API chatbot for customer inquiries.</p></div>
+            <div><b>Why</b><p>A friend getting married had met people 25 separate times just to hand out invitations, more than 100 hours in total. At another friend's group party, simple team games got guests who had never met talking to each other.</p></div>
+            <div><b>What I learned</b><p>Check demand before building more. I opened a landing page, interviewed people who had done this, and ran one pilot before fixing packages and prices. For the chatbot, deciding what it must never say came first: partner venue names are kept out of the prompt entirely and blocked again by an output filter.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="side" id="s-pauze">
+        <div class="gallery" style="margin-top:0;align-self:start">
+          <figure class="shot"><img src="../../img/pauze-trip.jpg" alt="PAUZE TRIP group at the summit of Taebaeksan" loading="lazy"><figcaption><span>Summit of Taebaeksan</span></figcaption></figure>
+        </div>
+        <div>
+          <span class="eyebrow">2026 · PAUZE TRIP</span>
+          <h3>An outdoor, phone-free community trip combining hiking, a book club and a morning barre session</h3>
+          <div class="wwl">
+            <div><b>What</b><p>I ran an offline community built around outdoor activity. Participants met at dawn and travelled together by chartered bus, climbed the snow-covered Taebaeksan with phones switched off, held a book club in the evening, and closed the next morning with a singing-bowl meditation and barre class run with partner instructors.</p></div>
+            <div><b>Why</b><p>After reading <i>The Comfort Crisis</i>, I climbed Hallasan alone and spent a temple stay with my phone off. The next morning a monk was eating breakfast while watching short videos. I wanted to share the experience of filling screen time with nature, exercise and real conversation.</p></div>
+            <div><b>What I learned</b><p>The 160,000 won fee ran at a loss even with donated food, so the next price comes from a cost simulation. A phone-free hike still needs group leaders with phones for safety. People from different fields only started talking once the sign-up form asked them to describe their work in plain words.</p></div>
+          </div>
+        </div>
+      </article>
+      <footer><span>Soungwoo Lee · 2026</span><span>Client names and market codes are withheld</span></footer>
+    </section>
+  </main>
+</div>
+<script src="../../js/data.js"></script>
+<script src="../../js/worldmap.js"></script>
+<script src="../../js/charts.js"></script>
+<script src="../../js/app.js"></script>
+<!--/BODY-->
+</body>
+</html>
