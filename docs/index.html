@@ -15,22 +15,20 @@
 <body>
 
 <nav class="topbar" aria-label="Sections">
-  <a href="writing/">writing</a><a href="#work">work</a><a href="#side">side</a>
+  <a href="#work">work</a><a href="writing/">writing</a><a href="side/">side</a>
 </nav>
 <div class="shell">
   <aside class="rail" aria-label="Contents">
     <div class="root">~/soungwoo/</div>
     <ul id="toc">
       <li><a href="#top">readme<span class="t">.md</span></a></li>
-      <li><a href="writing/">writing/</a></li><li class="sub"><a href="writing/brain-accel/">brain-accel</a></li>
-      <li><a href="#work">work/</a></li>
+            <li><a href="#work">work/</a></li>
       <li class="sub"><a href="#w-margin">margin-accounts</a></li>
       <li class="sub"><a href="#w-clv">clv</a></li>
       <li class="sub"><a href="#w-d2c">d2c-lead-time</a></li>
       <li class="sub"><a href="#w-context">team-context</a></li>
-      <li><a href="#side">side/</a></li>
-      <li class="sub"><a href="#s-wedding">pre-wedding</a></li>
-      <li class="sub"><a href="#s-pauze">pauze-trip</a></li>
+      <li><a href="writing/">writing/</a></li><li class="sub"><a href="writing/brain-accel/">brain-accel</a></li>
+      <li><a href="side/">side/</a></li>
     </ul>
     <div class="foot">
       <button class="theme-toggle" id="themeBtn" type="button">Toggle theme</button>
@@ -42,13 +40,6 @@
     <section class="hero col" id="top">
       <div class="name"><b>Soungwoo Lee</b><span>Senior Consultant, EY Consulting Korea</span><span>Seoul, Korea</span></div>
       <h1>I build strategy from data and help companies <em>make better decisions</em>.</h1>
-    </section>
-    <!-- WRITING -->
-    <section class="col" id="writing">
-      <span class="eyebrow">writing/</span>
-      <h2>Recent writing</h2>
-      <ul class="post-list"><li><a href="writing/brain-accel/"><span class="post-date">2026-10-15</span><b>내 뇌는 매일 공격받고 있다.</b><span class="post-desc">『브레인 악셀』을 읽고. 쇼츠는 왜 셀프 디도스인지, 멍때리는 시간에 뇌는 무엇을 하는지, 그리고 2주짜리 디지털 단절 계획.</span></a></li></ul>
-      <p class="more-link"><a href="writing/">All writing →</a></p>
     </section>
 
     <!-- WORK -->
@@ -170,41 +161,18 @@
     </section>
 
     <!-- SIDE -->
-    <section class="wide" id="side">
+    <!-- WRITING -->
+    <section class="col" id="writing">
+      <span class="eyebrow">writing/</span>
+      <h2>Recent writing</h2>
+      <ul class="post-list"><li><a href="writing/brain-accel/"><span class="post-date">2026-10-15</span><b>내 뇌는 매일 공격받고 있다.</b><span class="post-desc">『브레인 악셀』을 읽고. 쇼츠는 왜 셀프 디도스인지, 멍때리는 시간에 뇌는 무엇을 하는지, 그리고 2주짜리 디지털 단절 계획.</span></a></li></ul>
+      <p class="more-link"><a href="writing/">All writing →</a></p>
+    </section>
+
+    <section class="col" id="side-link">
       <span class="eyebrow">side/</span>
-      <h2>Outside work, I build and run things people show up for</h2>
-
-      <article class="side" id="s-wedding">
-        <div class="gallery" style="margin-top:0;align-self:start;grid-template-columns:1fr 1fr">
-          <figure class="shot big"><img src="img/wedding-1.jpg" alt="The couple at the group pre-wedding party on a rooftop" loading="lazy"><figcaption><span>The first party, for a friend's couple</span></figcaption></figure>
-          <figure class="shot big"><img src="img/invito_landing.jpg" alt="Landing page of the platform" loading="lazy"><figcaption><span>Landing page</span></figcaption></figure>
-        </div>
-        <div>
-          <span class="eyebrow">2026 · Pre-wedding party platform</span>
-          <h3>Turning twenty separate pre-wedding dinners into one party</h3>
-          <p class="live-link"><a href="https://invito-app.netlify.app/" target="_blank" rel="noopener">Visit the live site ↗</a></p>
-          <div class="wwl">
-            <div><b>What</b><p>A service that plans and runs one group party for couples before their wedding. The first one was a rooftop wine bar party for a friend's couple: a team quiz about the bride and groom, tacos from the restaurant they went to as students, and one photo board instead of flowers. I then built the landing page, the sign-up form linked to Google Sheets, custom quote pages, and a Claude API chatbot for customer inquiries.</p></div>
-            <div><b>Why</b><p>A friend getting married had met people 25 separate times just to hand out invitations, more than 100 hours in total. At another friend's group party, simple team games got guests who had never met talking to each other.</p></div>
-            <div><b>What I learned</b><p>Check demand before building more. I opened a landing page, interviewed people who had done this, and ran one pilot before fixing packages and prices. For the chatbot, deciding what it must never say came first: partner venue names are kept out of the prompt entirely and blocked again by an output filter.</p></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="side" id="s-pauze">
-        <div class="gallery" style="margin-top:0;align-self:start">
-          <figure class="shot"><img src="img/pauze-trip.jpg" alt="PAUZE TRIP group at the summit of Taebaeksan" loading="lazy"><figcaption><span>Summit of Taebaeksan</span></figcaption></figure>
-        </div>
-        <div>
-          <span class="eyebrow">2026 · PAUZE TRIP</span>
-          <h3>An outdoor, phone-free community trip combining hiking, a book club and a morning barre session</h3>
-          <div class="wwl">
-            <div><b>What</b><p>I ran an offline community built around outdoor activity. Participants met at dawn and travelled together by chartered bus, climbed the snow-covered Taebaeksan with phones switched off, held a book club in the evening, and closed the next morning with a singing-bowl meditation and barre class run with partner instructors.</p></div>
-            <div><b>Why</b><p>After reading <i>The Comfort Crisis</i>, I climbed Hallasan alone and spent a temple stay with my phone off. The next morning a monk was eating breakfast while watching short videos. I wanted to share the experience of filling screen time with nature, exercise and real conversation.</p></div>
-            <div><b>What I learned</b><p>The 160,000 won fee ran at a loss even with donated food, so the next price comes from a cost simulation. A phone-free hike still needs group leaders with phones for safety. People from different fields only started talking once the sign-up form asked them to describe their work in plain words.</p></div>
-          </div>
-        </div>
-      </article>
+      <h2>Side projects</h2>
+      <p class="more-link"><a href="side/">A pre-wedding party service and an offline community →</a></p>
       <footer><span>Soungwoo Lee · 2026</span><span>Client names and market codes are withheld</span></footer>
     </section>
   </main>

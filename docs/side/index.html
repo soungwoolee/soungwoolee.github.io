@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Side projects · Soungwoo Lee</title>
+<meta name="description" content="Side projects by Soungwoo Lee: a pre-wedding party service and an offline community.">
+<meta property="og:title" content="Side projects · Soungwoo Lee">
+<meta property="og:description" content="Side projects by Soungwoo Lee: a pre-wedding party service and an offline community.">
+<meta property="og:url" content="https://soungwoolee.github.io/side/">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="topbar simple" aria-label="Sections">
+  <a href="../">home</a><a href="../#work">work</a><a href="../writing/">writing</a><a href="../side/">side</a>
+</nav>
+<main class="post-main">
+
+    <section class="wide side-page" id="side">
+      <span class="eyebrow">side/</span>
+      <h2>Outside work, I build and run things people show up for</h2>
+
+      <article class="side" id="s-wedding">
+        <div class="gallery" style="margin-top:0;align-self:start;grid-template-columns:1fr 1fr">
+          <figure class="shot big"><img src="../img/wedding-1.jpg" alt="The couple at the group pre-wedding party on a rooftop" loading="lazy"><figcaption><span>The first party, for a friend's couple</span></figcaption></figure>
+          <figure class="shot big"><img src="../img/invito_landing.jpg" alt="Landing page of the platform" loading="lazy"><figcaption><span>Landing page</span></figcaption></figure>
+        </div>
+        <div>
+          <span class="eyebrow">2026 · Pre-wedding party platform</span>
+          <h3>Turning twenty separate pre-wedding dinners into one party</h3>
+          <p class="live-link"><a href="https://invito-app.netlify.app/" target="_blank" rel="noopener">Visit the live site ↗</a></p>
+          <div class="wwl">
+            <div><b>What</b><p>A service that plans and runs one group party for couples before their wedding. The first one was a rooftop wine bar party for a friend's couple: a team quiz about the bride and groom, tacos from the restaurant they went to as students, and one photo board instead of flowers. I then built the landing page, the sign-up form linked to Google Sheets, custom quote pages, and a Claude API chatbot for customer inquiries.</p></div>
+            <div><b>Why</b><p>A friend getting married had met people 25 separate times just to hand out invitations, more than 100 hours in total. At another friend's group party, simple team games got guests who had never met talking to each other.</p></div>
+            <div><b>What I learned</b><p>Check demand before building more. I opened a landing page, interviewed people who had done this, and ran one pilot before fixing packages and prices. For the chatbot, deciding what it must never say came first: partner venue names are kept out of the prompt entirely and blocked again by an output filter.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="side" id="s-pauze">
+        <div class="gallery" style="margin-top:0;align-self:start">
+          <figure class="shot"><img src="../img/pauze-trip.jpg" alt="PAUZE TRIP group at the summit of Taebaeksan" loading="lazy"><figcaption><span>Summit of Taebaeksan</span></figcaption></figure>
+        </div>
+        <div>
+          <span class="eyebrow">2026 · PAUZE TRIP</span>
+          <h3>An outdoor, phone-free community trip combining hiking, a book club and a morning barre session</h3>
+          <div class="wwl">
+            <div><b>What</b><p>I ran an offline community built around outdoor activity. Participants met at dawn and travelled together by chartered bus, climbed the snow-covered Taebaeksan with phones switched off, held a book club in the evening, and closed the next morning with a singing-bowl meditation and barre class run with partner instructors.</p></div>
+            <div><b>Why</b><p>After reading <i>The Comfort Crisis</i>, I climbed Hallasan alone and spent a temple stay with my phone off. The next morning a monk was eating breakfast while watching short videos. I wanted to share the experience of filling screen time with nature, exercise and real conversation.</p></div>
+            <div><b>What I learned</b><p>The 160,000 won fee ran at a loss even with donated food, so the next price comes from a cost simulation. A phone-free hike still needs group leaders with phones for safety. People from different fields only started talking once the sign-up form asked them to describe their work in plain words.</p></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+<footer class="post-foot"><a href="../">← Home</a><span>Soungwoo Lee</span></footer>
+</main>
+<script src="../js/app.js"></script>
+</body>
+</html>
