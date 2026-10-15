@@ -224,70 +224,141 @@ def build_side():
 
 
 MAP_NODES = [
-    ("work", "Profit driver alerts", "#w-margin", "Hypothesis thinking, Profitability, Data analysis, Decision support"),
-    ("work", "Customer lifetime value", "#w-clv", "Customer segmentation, Data modeling, Working with AI, Data analysis"),
-    ("work", "D2C lead time", "#w-d2c", "Process design, Data migration, E-commerce"),
-    ("work", "Shared AI context", "#w-context", "Working with AI, Structuring"),
-    ("side", "INVITO pre-wedding parties", "side/#s-wedding", "Demand testing, Working with AI, Community"),
-    ("side", "PAUZE TRIP", "side/#s-pauze", "Digital detox, Community, Outdoors"),
+    ("work", "Profit driver alerts", "#w-margin", "Profit alerts for an auto parts maker"),
+    ("work", "Customer lifetime value", "#w-clv", "Moving marketing budget to the customers worth keeping"),
+    ("work", "D2C lead time", "#w-d2c", "Cutting development lead time on a U.S. online store"),
+    ("work", "Shared AI context", "#w-context", "One rulebook so a whole team analyzed the same way"),
+    ("side", "INVITO", "side/#s-wedding", "Turning twenty pre-wedding dinners into one party"),
+    ("side", "PAUZE TRIP", "side/#s-pauze", "A phone-free hiking and book club trip"),
 ]
+
+# (페이지 라벨, 키워드) → 그 페이지에서 그 키워드가 어떻게 나오는지 한 줄. 본문에 있는 내용만.
+MAP_HOOKS = {
+    "Brain Accel notes": {
+        "Digital detox": "Delete the apps outright. I still end up reinstalling them.",
+        "Attention": "Endless Shorts are a self-inflicted DDoS on your own brain.",
+        "Habits": "A reward you can't predict is exactly what locks a habit in.",
+        "Book notes": "Zoning out is when your brain tidies up.",
+    },
+    "Four consulting books": {
+        "Hypothesis thinking": "Without a hypothesis, data is a swamp. I've been back in it plenty of times.",
+        "MECE": "\"Make it MECE\" isn't an instruction.",
+        "Structuring": "Most lists don't fail on gaps. They fail on level.",
+        "Storytelling with data": "Every chart needs a point, even if the title doesn't spell it out.",
+        "Estimation": "No client has ever asked how many lattes a Starbucks sells. I estimate every day anyway.",
+        "Working with AI": "AI now beats me at a lot of what I spent years learning.",
+        "Book notes": "Four books from my first year, reread five years in.",
+    },
+    "\"Make it MECE\"": {
+        "MECE": "No overlaps, no gaps is what a list looks like once it's done.",
+        "Structuring": "Put interior design next to services and the list stops splitting cleanly.",
+        "Customer segmentation": "The way to split customers came from what we wanted to do with the split.",
+    },
+    "Profit driver alerts": {
+        "Hypothesis thinking": "Bet that a handful of accounts drove the swings. 10 of 309 explained 70.8%.",
+        "Profitability": "Margin rate, not volume, drove almost every monthly profit swing.",
+        "Data analysis": "60 months of P&L across 309 cost accounts.",
+        "Decision support": "Alerts so management can act within the month, not after the close.",
+    },
+    "Customer lifetime value": {
+        "Customer segmentation": "Repeat buyers spend 30% more and cost a third as much to acquire.",
+        "Data modeling": "Rebuilt the client's data model without access to their database.",
+        "Working with AI": "Gave AI the business context to map how the tables connect.",
+        "Data analysis": "A lifetime value model on BigQuery that moved the marketing budget.",
+    },
+    "D2C lead time": {
+        "Process design": "Merged fragmented reviews into one joint review.",
+        "Data migration": "Defined target data structures and source-to-target mapping for a U.S. store.",
+        "E-commerce": "Cut development lead time by 12% across 40+ subsidiaries.",
+    },
+    "Shared AI context": {
+        "Working with AI": "Shared AI context so every analyst used the same definitions.",
+        "Structuring": "Definitions, procedures and guardrails written down as one set of rules.",
+    },
+    "INVITO": {
+        "Demand testing": "Ran one pilot party before fixing packages and prices.",
+        "Working with AI": "Built the landing page and a Claude API chatbot without a developer.",
+        "Community": "A team quiz got guests who had never met talking to each other.",
+    },
+    "PAUZE TRIP": {
+        "Digital detox": "A snow-covered summit with every phone switched off.",
+        "Community": "People only opened up once the form asked them to describe their work in plain words.",
+        "Outdoors": "A dawn bus, a summit hike, an evening book club, a morning barre class.",
+    },
+}
 
 
 def build_map(posts):
     nodes, links, kw = [], [], {}
-    def add(kind, label, url, tags):
+    def add(kind, label, url, desc):
         i = len(nodes)
-        nodes.append({"id": i, "kind": kind, "label": label, "url": url})
-        for t in [x.strip() for x in tags.split(",") if x.strip()]:
+        nodes.append({"id": i, "kind": kind, "label": label, "url": url, "desc": desc})
+        for t, hook in MAP_HOOKS.get(label, {}).items():
             if t not in kw:
                 kw[t] = len(nodes)
                 nodes.append({"id": kw[t], "kind": "tag", "label": t})
-            links.append({"source": i, "target": kw[t]})
+            links.append({"source": i, "target": kw[t], "hook": hook})
     for p in posts:
-        if p.get("listed", "yes") != "no" and p.get("tags"):
-            add("post", p.get("short", p["title"]), f'writing/{p["slug"]}/', p["tags"])
-    for kind, label, url, t in MAP_NODES:
-        add(kind, label, url, t)
+        if p.get("listed", "yes") != "no" and p.get("short") in MAP_HOOKS:
+            add("post", p["short"], f'writing/{p["slug"]}/', p.get("description", ""))
+    for kind, label, url, desc in MAP_NODES:
+        add(kind, label, url, desc)
     deg = {}
     for l in links:
         deg[l["target"]] = deg.get(l["target"], 0) + 1
     for n in nodes:
-        if n["kind"] == "tag":
-            n["deg"] = deg.get(n["id"], 1)
+        n["deg"] = deg.get(n["id"], 1) if n["kind"] == "tag" else 0
     data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
-    inner = f'''<section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
-<p>Every page on this site, linked by the ideas it shares. Larger keywords show up in more places. Hover to trace a thread, click a page to open it.</p>
+    inner = f"""<section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
+<p>Every page on this site, linked by the ideas they share. Hover or tap a keyword to see where it shows up.</p>
 <div class="map-legend"><span class="mlg k-post">Writing</span><span class="mlg k-work">Work</span><span class="mlg k-side">Side projects</span><span class="mlg k-tag">Keyword</span></div></section>
-<div id="map" class="map-canvas" aria-label="Site map graph"></div>
+<div id="map" class="map-canvas" aria-label="Site map graph"><div id="mapTip" class="map-tip" hidden></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 const DATA={data};
 (function(){{
-const el=document.getElementById('map');const W=el.clientWidth,H=Math.max(620,Math.min(820,W*0.7));
+const el=document.getElementById('map'),tip=document.getElementById('mapTip');
+const W=1000,H=640;
 const css=getComputedStyle(document.documentElement);
 const col={{post:css.getPropertyValue('--accent').trim()||'#3446c4',work:'#2f8f6a',side:'#d9822b',tag:css.getPropertyValue('--ink-2').trim()||'#666'}};
-const svg=d3.select(el).append('svg').attr('viewBox',[0,0,W,H]).attr('width','100%').attr('height',H);
 const sim=d3.forceSimulation(DATA.nodes)
- .force('link',d3.forceLink(DATA.links).id(d=>d.id).distance(95).strength(0.55))
- .force('charge',d3.forceManyBody().strength(d=>d.kind==='tag'?-260:-900))
- .force('center',d3.forceCenter(W/2,H/2)).force('x',d3.forceX(W/2).strength(0.03)).force('y',d3.forceY(H/2).strength(0.05))
- .force('collide',d3.forceCollide(d=>d.kind==='tag'?26+d.deg*3:14+d.label.length*3.4));
-const link=svg.append('g').attr('class','m-links').selectAll('line').data(DATA.links).join('line');
-const node=svg.append('g').selectAll('g').data(DATA.nodes).join('g').attr('class',d=>'m-node '+d.kind)
- .style('cursor',d=>d.url?'pointer':'default').on('click',(e,d)=>{{if(d.url)location.href='../'+d.url}});
-node.append('circle').attr('r',d=>d.kind==='tag'?4+d.deg*2:10).attr('fill',d=>d.kind==='tag'?'var(--bg)':col[d.kind]).attr('stroke',d=>d.kind==='tag'?col.tag:'none').attr('stroke-width',2);
-node.append('text').text(d=>d.label).attr('x',0).attr('y',d=>d.kind==='tag'?-(9+d.deg*2):26).attr('text-anchor','middle');
-const adj=new Set(DATA.links.map(l=>l.source.id+'-'+l.target.id));
-const near=(a,b)=>a===b||adj.has(a.id+'-'+b.id)||adj.has(b.id+'-'+a.id);
-node.on('mouseenter',(e,d)=>{{node.classed('dim',n=>!near(d,n));link.classed('hot',l=>l.source===d||l.target===d).classed('dim',l=>!(l.source===d||l.target===d))}})
- .on('mouseleave',()=>{{node.classed('dim',false);link.classed('hot',false).classed('dim',false)}});
-node.call(d3.drag().on('start',(e,d)=>{{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y}})
- .on('drag',(e,d)=>{{d.fx=e.x;d.fy=e.y}}).on('end',(e,d)=>{{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}}));
-sim.on('tick',()=>{{DATA.nodes.forEach(d=>{{d.x=Math.max(70,Math.min(W-70,d.x));d.y=Math.max(30,Math.min(H-30,d.y))}});
- link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
- node.attr('transform',d=>`translate(${{d.x}},${{d.y}})`)}});
+ .force('link',d3.forceLink(DATA.links).id(d=>d.id).distance(80).strength(0.6))
+ .force('charge',d3.forceManyBody().strength(d=>d.kind==='tag'?-220:-700))
+ .force('center',d3.forceCenter(W/2,H/2)).force('x',d3.forceX(W/2).strength(0.05)).force('y',d3.forceY(H/2).strength(0.08))
+ .force('collide',d3.forceCollide(d=>d.kind==='tag'?22+d.deg*3:12+d.label.length*3.2)).stop();
+for(let i=0;i<400;i++)sim.tick();
+const xs=DATA.nodes.map(d=>d.x),ys=DATA.nodes.map(d=>d.y),pad=70;
+const vb=[Math.min(...xs)-pad,Math.min(...ys)-pad,Math.max(...xs)-Math.min(...xs)+pad*2,Math.max(...ys)-Math.min(...ys)+pad*2];
+const svg=d3.select(el).append('svg').attr('viewBox',vb).attr('preserveAspectRatio','xMidYMid meet');
+const link=svg.append('g').selectAll('line').data(DATA.links).join('line').attr('class',d=>'m-link k-'+d.source.kind);
+const node=svg.append('g').selectAll('g').data(DATA.nodes).join('g').attr('class',d=>'m-node k-'+d.kind)
+ .style('cursor','pointer');
+node.append('circle').attr('r',d=>d.kind==='tag'?5+d.deg*2.2:11).attr('fill',d=>d.kind==='tag'?'var(--bg)':col[d.kind]).attr('stroke',d=>d.kind==='tag'?col.tag:'var(--bg)').attr('stroke-width',d=>d.kind==='tag'?2:3);
+node.append('text').text(d=>d.label).attr('x',0).attr('y',d=>d.kind==='tag'?-(10+d.deg*2.2):28).attr('text-anchor','middle');
+const place=()=>{{link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);node.attr('transform',d=>`translate(${{d.x}},${{d.y}})`)}};
+place();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}}[c]));
+let pinned=null;
+function focus(d){{
+  const touch=new Set([d]);DATA.links.forEach(l=>{{if(l.source===d)touch.add(l.target);if(l.target===d)touch.add(l.source)}});
+  node.classed('dim',n=>!touch.has(n));link.classed('hot',l=>l.source===d||l.target===d).classed('dim',l=>!(l.source===d||l.target===d));
+  let html='';
+  if(d.kind==='tag'){{html=`<b class="t-key">${{esc(d.label)}}</b><ul>`+DATA.links.filter(l=>l.target===d).map(l=>`<li><a href="../${{l.source.url}}"><span class="t-${{l.source.kind}}">${{esc(l.source.label)}}</span>${{esc(l.hook)}}</a></li>`).join('')+'</ul>';}}
+  else{{html=`<a class="t-head t-${{d.kind}}" href="../${{d.url}}">${{esc(d.label)}} →</a><p>${{esc(d.desc)}}</p>`;}}
+  tip.innerHTML=html;tip.hidden=false;
+  const r=el.getBoundingClientRect(),pt=svg.node().createSVGPoint();pt.x=d.x;pt.y=d.y;const s=pt.matrixTransform(svg.node().getScreenCTM());
+  let x=s.x-r.left+18,y=s.y-r.top+18;if(x+300>r.width)x=Math.max(8,s.x-r.left-318);if(y+tip.offsetHeight>r.height)y=Math.max(8,r.height-tip.offsetHeight-8);
+  tip.style.left=x+'px';tip.style.top=y+'px';
+}}
+let ht=null;function clear(){{if(pinned)return;node.classed('dim',false);link.classed('hot',false).classed('dim',false);tip.hidden=true}}
+const later=()=>{{clearTimeout(ht);ht=setTimeout(clear,280)}};
+node.on('mouseenter',(e,d)=>{{clearTimeout(ht);if(!pinned)focus(d)}}).on('mouseleave',later)
+ .on('click',(e,d)=>{{e.stopPropagation();if(d.kind!=='tag'&&pinned===null&&matchMedia('(hover:hover)').matches){{location.href='../'+d.url;return}}pinned=(pinned===d)?null:d;if(pinned)focus(d);else{{pinned=null;clear()}}}});
+tip.addEventListener('mouseenter',()=>clearTimeout(ht));tip.addEventListener('mouseleave',later);
+el.addEventListener('click',e=>{{if(e.target.closest('.map-tip'))return;pinned=null;clear()}});
+node.call(d3.drag().on('drag',(e,d)=>{{d.x=e.x;d.y=e.y;place()}}));
 }})();
-</script>'''
+</script>"""
     d = OUT / "map"
     d.mkdir(parents=True, exist_ok=True)
     (d / "index.html").write_text(page("Map · Soungwoo Lee", "A keyword map of Soungwoo Lee's work, writing and side projects.", simple_shell("../", inner), "../", url="map/"))
@@ -309,14 +380,26 @@ POST_CSS = """
 .map-intro p{color:var(--ink-2);max-width:62ch}
 .map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
 .map-legend .mlg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-.mlg.k-post::before{background:var(--accent)}.mlg.k-work::before{background:#2f8f6a}.mlg.k-side::before{background:#d9822b}.mlg.k-tag::before{background:var(--ink-2)}
-.map-canvas{margin-top:20px;border:1px solid var(--rule);border-radius:14px;background:var(--panel,transparent);overflow:hidden}
-.map-canvas line{stroke:var(--rule);stroke-width:1.4}
-.map-canvas line.hot{stroke:var(--accent);stroke-width:2.2}
-.map-canvas .dim{opacity:.18}
-.map-canvas text{font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
-.map-canvas .m-node.tag text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
-.map-canvas .m-node.post text,.map-canvas .m-node.work text,.map-canvas .m-node.side text{font-weight:600}
+.mlg.k-post::before{background:var(--accent)}.mlg.k-work::before{background:#2f8f6a}.mlg.k-side::before{background:#d9822b}.mlg.k-tag::before{border:2px solid var(--ink-2);width:7px;height:7px}
+.map-canvas{position:relative;margin-top:20px;border:1px solid var(--rule);border-radius:14px;overflow:hidden;height:min(68vh,620px);min-height:420px}
+.map-canvas svg{width:100%;height:100%;display:block}
+.m-link{stroke-width:1.8;opacity:.55}
+.m-link.k-post{stroke:var(--accent)}.m-link.k-work{stroke:#2f8f6a}.m-link.k-side{stroke:#d9822b}
+.m-link.hot{opacity:1;stroke-width:3;stroke-dasharray:6 6;animation:flow 1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-12}}
+.map-canvas .dim{opacity:.12;transition:opacity .15s}
+.m-node{transition:opacity .15s}
+.map-canvas text{font-size:14px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-weight:600}
+.m-node.k-tag text{font-family:var(--mono);font-size:12.5px;fill:var(--ink-2);font-weight:500}
+.m-node:hover circle{filter:drop-shadow(0 0 6px rgba(0,0,0,.25))}
+.map-tip{position:absolute;z-index:3;width:300px;max-width:calc(100% - 16px);background:var(--bg);border:1px solid var(--rule);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);padding:12px 14px;font-size:13.5px;line-height:1.45}
+.map-tip ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.map-tip a{color:var(--ink);text-decoration:none;display:block}
+.map-tip a:hover{color:var(--accent)}
+.map-tip li span{display:block;font-family:var(--mono);font-size:11.5px;margin-bottom:2px}
+.t-key{font-family:var(--mono);font-size:12.5px}
+.t-post{color:var(--accent)}.t-work{color:#2f8f6a}.t-side{color:#d9822b}
+.t-head{font-weight:600}.map-tip p{margin:6px 0 0;color:var(--ink-2)}
 /* writing */
 .post-main:has(.post-toc){max-width:1120px}
 .post-wrap{display:block}
