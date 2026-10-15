@@ -21,7 +21,7 @@
 </nav>
 <main class="post-main">
 <section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
-<p>Every page on this site, linked by the ideas they share. Hover or tap a keyword to see where it shows up.</p>
+<p>Every page on this site, linked by the ideas they share. Hover a keyword to trace where it shows up, and click a page to open it.</p>
 <div class="map-legend"><span class="mlg k-post">Writing</span><span class="mlg k-work">Work</span><span class="mlg k-side">Side projects</span><span class="mlg k-tag">Keyword</span></div></section>
 <div id="map" class="map-canvas" aria-label="Site map graph"><div id="mapTip" class="map-tip" hidden></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -56,7 +56,7 @@ function focus(d){
   let html='';
   if(d.kind==='tag'){html=`<b class="t-key">${esc(d.label)}</b><ul>`+DATA.links.filter(l=>l.target===d).map(l=>`<li><a href="../${l.source.url}"><span class="t-${l.source.kind}">${esc(l.source.label)}</span>${esc(l.hook)}</a></li>`).join('')+'</ul>';}
   else{html=`<a class="t-head t-${d.kind}" href="../${d.url}">${esc(d.label)} →</a><p>${esc(d.desc)}</p>`;}
-  tip.innerHTML=html;tip.hidden=false;
+  return;
   const r=el.getBoundingClientRect(),pt=svg.node().createSVGPoint();pt.x=d.x;pt.y=d.y;const s=pt.matrixTransform(svg.node().getScreenCTM());
   const nx=s.x-r.left,ny=s.y-r.top,tw=tip.offsetWidth,th=tip.offsetHeight,gap=22;
   let side=(ny-th-gap>8)?'top':'bottom';let y=side==='top'?ny-th-gap:ny+gap;
