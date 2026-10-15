@@ -58,8 +58,11 @@ function focus(d){
   else{html=`<a class="t-head t-${d.kind}" href="../${d.url}">${esc(d.label)} →</a><p>${esc(d.desc)}</p>`;}
   tip.innerHTML=html;tip.hidden=false;
   const r=el.getBoundingClientRect(),pt=svg.node().createSVGPoint();pt.x=d.x;pt.y=d.y;const s=pt.matrixTransform(svg.node().getScreenCTM());
-  let x=s.x-r.left+18,y=s.y-r.top+18;if(x+300>r.width)x=Math.max(8,s.x-r.left-318);if(y+tip.offsetHeight>r.height)y=Math.max(8,r.height-tip.offsetHeight-8);
-  tip.style.left=x+'px';tip.style.top=y+'px';
+  const nx=s.x-r.left,ny=s.y-r.top,tw=tip.offsetWidth,th=tip.offsetHeight,gap=22;
+  let side=(ny-th-gap>8)?'top':'bottom';let y=side==='top'?ny-th-gap:ny+gap;
+  let x=Math.max(8,Math.min(r.width-tw-8,nx-tw/2));
+  tip.dataset.side=side;tip.style.setProperty('--ax',(nx-x)+'px');tip.style.left=x+'px';tip.style.top=y+'px';
+  tip.classList.remove('pop');void tip.offsetWidth;tip.classList.add('pop');
 }
 let ht=null;function clear(){if(pinned)return;node.classed('dim',false);link.classed('hot',false).classed('dim',false);tip.hidden=true}
 const later=()=>{clearTimeout(ht);ht=setTimeout(clear,280)};

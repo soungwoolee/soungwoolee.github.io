@@ -189,7 +189,7 @@ def build_writing(posts):
         if toc:
             toc_html = ('<aside class="post-toc" aria-label="On this page"><div class="post-toc-in"><span class="eyebrow">'
                         + ("이 글의 목차" if p.get("lang") == "ko" else "On this page") + '</span><ol>'
-                        + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in toc) + '</ol></div></aside>')
+                        + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in toc) + '</ol>' + local_graph(posts, p, "../../") + '</div></aside>')
         inner = f'''<div class="post-wrap">
 {toc_html}
 <article class="col why post">
@@ -197,10 +197,11 @@ def build_writing(posts):
 <h1 class="post-title">{html.escape(p["title"])}</h1>
 {toggle}
 {body_html}
+<div class="post-local-m">{local_graph(posts, p, "../../")}</div>
 </article>
 </div>
 <script>
-(function(){{const links=[...document.querySelectorAll('.post-toc a')];if(!links.length)return;
+(function(){{const links=[...document.querySelectorAll('.post-toc ol a')];if(!links.length)return;
 const heads=links.map(a=>document.querySelector(a.getAttribute('href')));
 const on=()=>{{let k=0;heads.forEach((h,i)=>{{if(h.getBoundingClientRect().top<120)k=i}});links.forEach((a,i)=>a.classList.toggle('on',i===k))}};
 addEventListener('scroll',on,{{passive:true}});on();}})();
@@ -288,7 +289,7 @@ MAP_HOOKS = {
 }
 
 
-def build_map(posts):
+def map_data(posts):
     nodes, links, kw = [], [], {}
     def add(kind, label, url, desc):
         i = len(nodes)
@@ -308,6 +309,49 @@ def build_map(posts):
         deg[l["target"]] = deg.get(l["target"], 0) + 1
     for n in nodes:
         n["deg"] = deg.get(n["id"], 1) if n["kind"] == "tag" else 0
+    return nodes, links
+
+
+def local_graph(posts, p, prefix):
+    """글 하나와 바로 연결된 키워드, 그 키워드를 공유하는 다른 페이지만 그린 작은 지도 (Quartz의 local graph)."""
+    import math
+    short = p.get("short") or next((q.get("short") for q in posts if q["slug"] == p.get("translation")), None)
+    if not short:
+        return ""
+    nodes, links = map_data(posts)
+    me = next((n for n in nodes if n["label"] == short and n["kind"] != "tag"), None)
+    if not me:
+        return ""
+    tags = [nodes[l["target"]] for l in links if l["source"] == me["id"]]
+    S, C = 240, 120
+    col = {"post": "var(--accent)", "work": "#2f8f6a", "side": "#d9822b"}
+    out, placed = [], {}
+    for i, t in enumerate(tags):
+        a = -math.pi / 2 + 2 * math.pi * i / len(tags)
+        tx, ty = C + 54 * math.cos(a), C + 54 * math.sin(a)
+        out.append(f'<line x1="{C}" y1="{C}" x2="{tx:.1f}" y2="{ty:.1f}" class="lg-l"/>')
+        others = [nodes[l["source"]] for l in links if l["target"] == t["id"] and l["source"] != me["id"]]
+        for j, o in enumerate(others):
+            if o["id"] in placed:
+                ox, oy = placed[o["id"]]
+            else:
+                b = a + (j - (len(others) - 1) / 2) * 0.42
+                ox, oy = C + 102 * math.cos(b), C + 102 * math.sin(b)
+                placed[o["id"]] = (ox, oy)
+            out.append(f'<line x1="{tx:.1f}" y1="{ty:.1f}" x2="{ox:.1f}" y2="{oy:.1f}" class="lg-l"/>')
+        out.append(f'<g class="lg-n lg-tag"><circle cx="{tx:.1f}" cy="{ty:.1f}" r="5"/><text x="{tx:.1f}" y="{ty - 10:.1f}">{html.escape(t["label"])}</text></g>')
+    for oid, (ox, oy) in placed.items():
+        o = nodes[oid]
+        out.append(f'<a href="{prefix}{o["url"]}" class="lg-n"><circle cx="{ox:.1f}" cy="{oy:.1f}" r="6" fill="{col[o["kind"]]}"/><text x="{ox:.1f}" y="{oy + 18:.1f}">{html.escape(o["label"])}</text></a>')
+    out.append(f'<g class="lg-n lg-me"><circle cx="{C}" cy="{C}" r="8" fill="{col[me["kind"]]}"/></g>')
+    svg = f'<svg viewBox="0 0 {S} {S}" class="local-graph" role="img" aria-label="Pages connected to this one">' + "".join(out) + "</svg>"
+    label = "연결된 글" if p.get("lang") == "ko" else "Connected"
+    return (f'<div class="local-graph-box"><span class="eyebrow">{label}</span>{svg}'
+            f'<a class="lg-more" href="{prefix}map/">{"전체 지도 보기" if p.get("lang") == "ko" else "Open the full map"} →</a></div>')
+
+
+def build_map(posts):
+    nodes, links = map_data(posts)
     data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
     inner = f"""<section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
 <p>Every page on this site, linked by the ideas they share. Hover or tap a keyword to see where it shows up.</p>
@@ -347,8 +391,11 @@ function focus(d){{
   else{{html=`<a class="t-head t-${{d.kind}}" href="../${{d.url}}">${{esc(d.label)}} →</a><p>${{esc(d.desc)}}</p>`;}}
   tip.innerHTML=html;tip.hidden=false;
   const r=el.getBoundingClientRect(),pt=svg.node().createSVGPoint();pt.x=d.x;pt.y=d.y;const s=pt.matrixTransform(svg.node().getScreenCTM());
-  let x=s.x-r.left+18,y=s.y-r.top+18;if(x+300>r.width)x=Math.max(8,s.x-r.left-318);if(y+tip.offsetHeight>r.height)y=Math.max(8,r.height-tip.offsetHeight-8);
-  tip.style.left=x+'px';tip.style.top=y+'px';
+  const nx=s.x-r.left,ny=s.y-r.top,tw=tip.offsetWidth,th=tip.offsetHeight,gap=22;
+  let side=(ny-th-gap>8)?'top':'bottom';let y=side==='top'?ny-th-gap:ny+gap;
+  let x=Math.max(8,Math.min(r.width-tw-8,nx-tw/2));
+  tip.dataset.side=side;tip.style.setProperty('--ax',(nx-x)+'px');tip.style.left=x+'px';tip.style.top=y+'px';
+  tip.classList.remove('pop');void tip.offsetWidth;tip.classList.add('pop');
 }}
 let ht=null;function clear(){{if(pinned)return;node.classed('dim',false);link.classed('hot',false).classed('dim',false);tip.hidden=true}}
 const later=()=>{{clearTimeout(ht);ht=setTimeout(clear,280)}};
@@ -392,7 +439,12 @@ POST_CSS = """
 .map-canvas text{font-size:14px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:5px;stroke-linejoin:round;pointer-events:none;font-weight:600}
 .m-node.k-tag text{font-family:var(--mono);font-size:12.5px;fill:var(--ink-2);font-weight:500}
 .m-node:hover circle{filter:drop-shadow(0 0 6px rgba(0,0,0,.25))}
-.map-tip{position:absolute;z-index:3;width:300px;max-width:calc(100% - 16px);background:var(--bg);border:1px solid var(--rule);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.12);padding:12px 14px;font-size:13.5px;line-height:1.45}
+.map-tip{position:absolute;z-index:3;width:300px;max-width:calc(100% - 16px);background:var(--bg);border:1.5px solid var(--ink);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.14);padding:12px 16px;font-size:13.5px;line-height:1.45}
+.map-tip::after{content:"";position:absolute;left:calc(var(--ax,50%) - 9px);width:16px;height:16px;background:var(--bg);border:1.5px solid var(--ink);transform:rotate(45deg)}
+.map-tip[data-side="top"]::after{bottom:-9.5px;border-top:0;border-left:0}
+.map-tip[data-side="bottom"]::after{top:-9.5px;border-bottom:0;border-right:0}
+.map-tip.pop{animation:pop .18s cubic-bezier(.3,1.6,.6,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 .map-tip ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
 .map-tip a{color:var(--ink);text-decoration:none;display:block}
 .map-tip a:hover{color:var(--accent)}
@@ -400,6 +452,19 @@ POST_CSS = """
 .t-key{font-family:var(--mono);font-size:12.5px}
 .t-post{color:var(--accent)}.t-work{color:#2f8f6a}.t-side{color:#d9822b}
 .t-head{font-weight:600}.map-tip p{margin:6px 0 0;color:var(--ink-2)}
+/* local graph */
+.local-graph-box{margin-top:28px}
+.local-graph{width:100%;max-width:240px;height:auto;display:block;margin-top:6px;overflow:visible}
+.lg-l{stroke:var(--rule);stroke-width:1.4}
+.lg-n circle{transition:r .15s}
+.lg-tag circle{fill:var(--bg);stroke:var(--ink-2);stroke-width:1.6}
+.lg-me circle{stroke:var(--bg);stroke-width:3}
+.lg-n text{font-size:11px;fill:var(--ink);text-anchor:middle;opacity:0;transition:opacity .15s;paint-order:stroke;stroke:var(--bg);stroke-width:4px;pointer-events:none}
+.lg-tag text{font-family:var(--mono);fill:var(--ink-2)}
+.lg-n:hover text{opacity:1!important}
+.lg-more{display:inline-block;margin-top:6px;font-size:12px;font-family:var(--mono);color:var(--accent);text-decoration:none}
+.post-local-m{display:block;margin-top:40px}
+@media (min-width:1080px){.post-local-m{display:none}}
 /* writing */
 .post-main:has(.post-toc){max-width:1120px}
 .post-wrap{display:block}
