@@ -30,7 +30,7 @@ def inline(t):
     return t
 
 
-def md_to_html(md, prefix):
+def md_to_html(md, prefix, toc=None):
     out, lst = [], None
     for block in re.split(r"\n\s*\n", md.strip()):
         lines = [l for l in block.split("\n") if l.strip()]
@@ -45,7 +45,10 @@ def md_to_html(md, prefix):
                 continue
             first = lines[0].strip()
         if first.startswith("## "):
-            out.append(f'<h3 class="essay-h">{inline(first[3:])}</h3>')
+            hid = f"s{len(toc) + 1}" if toc is not None else ""
+            if toc is not None:
+                toc.append((hid, inline(first[3:])))
+            out.append(f'<h3 class="essay-h" id="{hid}">{inline(first[3:])}</h3>')
             lines = lines[1:]
             if not lines:
                 continue
@@ -111,6 +114,7 @@ def simple_shell(prefix, inner):
 # ---------- 홈 ----------
 
 def build_home(posts):
+    posts = [p for p in posts if p.get("listed", "yes") != "no"]
     t = (CAREER / "build" / "page_parts.html").read_text()
     t = t.split("<!--BODY-->")[1].split("<!--/BODY-->")[0]
     t = t.replace('<a href="#why">why-anthropic</a><a href="#work">work</a><a href="#side">side</a>', '<a href="#work">work</a><a href="writing/">writing</a><a href="side/">side</a>')
@@ -161,20 +165,46 @@ def build_home(posts):
 # ---------- 글 목록·글 ----------
 
 def build_writing(posts):
+    listed = [p for p in posts if p.get("listed", "yes") != "no"]
     items = "".join(
         f'<li><a href="{p["slug"]}/"><span class="post-date">{p["date"]}</span><b>{html.escape(p["title"])}</b><span class="post-desc">{html.escape(p.get("description",""))}</span></a></li>'
-        for p in posts)
+        for p in listed)
     inner = f'<section class="col"><span class="eyebrow">writing/</span><h2>Writing</h2><ul class="post-list">{items}</ul></section>'
     (OUT / "writing").mkdir(parents=True, exist_ok=True)
     (OUT / "writing" / "index.html").write_text(page("Writing · Soungwoo Lee", "Book notes and essays by Soungwoo Lee.", simple_shell("../", inner), "../", url="writing/"))
     for p in posts:
         d = OUT / "writing" / p["slug"]
         d.mkdir(parents=True, exist_ok=True)
-        inner = f'''<article class="col why post">
+        toc = []
+        body_html = md_to_html(p["body"], "../../", toc)
+        toggle = ""
+        if p.get("translation"):
+            other = next(q for q in posts if q["slug"] == p["translation"])
+            ko, en = (p, other) if p.get("lang") == "ko" else (other, p)
+            cur = p.get("lang", "en")
+            toggle = (f'<div class="lang-toggle" role="group" aria-label="Language">'
+                      f'<a href="../{en["slug"]}/" class="{"on" if cur == "en" else ""}" lang="en">English</a>'
+                      f'<a href="../{ko["slug"]}/" class="{"on" if cur == "ko" else ""}" lang="ko">한국어</a></div>')
+        toc_html = ""
+        if toc:
+            toc_html = ('<aside class="post-toc" aria-label="On this page"><div class="post-toc-in"><span class="eyebrow">'
+                        + ("이 글의 목차" if p.get("lang") == "ko" else "On this page") + '</span><ol>'
+                        + "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in toc) + '</ol></div></aside>')
+        inner = f'''<div class="post-wrap">
+{toc_html}
+<article class="col why post">
 <span class="eyebrow">{p["date"]}</span>
 <h1 class="post-title">{html.escape(p["title"])}</h1>
-{md_to_html(p["body"], "../../")}
-</article>'''
+{toggle}
+{body_html}
+</article>
+</div>
+<script>
+(function(){{const links=[...document.querySelectorAll('.post-toc a')];if(!links.length)return;
+const heads=links.map(a=>document.querySelector(a.getAttribute('href')));
+const on=()=>{{let k=0;heads.forEach((h,i)=>{{if(h.getBoundingClientRect().top<120)k=i}});links.forEach((a,i)=>a.classList.toggle('on',i===k))}};
+addEventListener('scroll',on,{{passive:true}});on();}})();
+</script>'''
         (d / "index.html").write_text(page(f'{p["title"]} · Soungwoo Lee', p.get("description", ""), simple_shell("../../", inner), "../../",
                                            lang=p.get("lang", "en"), image=p.get("image"), url=f'writing/{p["slug"]}/'))
 
@@ -205,6 +235,22 @@ def build_why():
 
 POST_CSS = """
 /* writing */
+.post-main:has(.post-toc){max-width:1120px}
+.post-wrap{display:block}
+.post-toc{display:none}
+@media (min-width:1080px){
+  .post-wrap:has(.post-toc){display:grid;grid-template-columns:220px minmax(0,760px);gap:56px;justify-content:center}
+  .post-toc{display:block}
+  .post-toc-in{position:sticky;top:72px;font-size:13px;line-height:1.45}
+  .post-toc ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--rule)}
+  .post-toc a{display:block;padding:6px 0 6px 12px;margin-left:-2px;border-left:2px solid transparent;color:var(--ink-2);text-decoration:none}
+  .post-toc a:hover{color:var(--ink)}
+  .post-toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+}
+.essay-h{scroll-margin-top:72px}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;margin:0 0 20px;font-family:var(--mono);font-size:13px}
+.lang-toggle a{padding:4px 12px;border-radius:999px;color:var(--ink-2);text-decoration:none}
+.lang-toggle a.on{background:var(--ink);color:var(--bg)}
 .post mark{background:linear-gradient(transparent 55%,#ffe58a 55%);color:inherit;padding:0 2px}
 :root[data-theme="dark"] .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}}

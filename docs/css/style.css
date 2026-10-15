@@ -413,6 +413,22 @@ footer { margin-top: 96px; border-top: 1px solid var(--rule); padding-top: 20px;
 .live-link a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
 
 /* writing */
+.post-main:has(.post-toc){max-width:1120px}
+.post-wrap{display:block}
+.post-toc{display:none}
+@media (min-width:1080px){
+  .post-wrap:has(.post-toc){display:grid;grid-template-columns:220px minmax(0,760px);gap:56px;justify-content:center}
+  .post-toc{display:block}
+  .post-toc-in{position:sticky;top:72px;font-size:13px;line-height:1.45}
+  .post-toc ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--rule)}
+  .post-toc a{display:block;padding:6px 0 6px 12px;margin-left:-2px;border-left:2px solid transparent;color:var(--ink-2);text-decoration:none}
+  .post-toc a:hover{color:var(--ink)}
+  .post-toc a.on{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+}
+.essay-h{scroll-margin-top:72px}
+.lang-toggle{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;margin:0 0 20px;font-family:var(--mono);font-size:13px}
+.lang-toggle a{padding:4px 12px;border-radius:999px;color:var(--ink-2);text-decoration:none}
+.lang-toggle a.on{background:var(--ink);color:var(--bg)}
 .post mark{background:linear-gradient(transparent 55%,#ffe58a 55%);color:inherit;padding:0 2px}
 :root[data-theme="dark"] .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .post mark{background:linear-gradient(transparent 55%,#6b5a1e 55%)}}

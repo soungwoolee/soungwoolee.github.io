@@ -6,7 +6,7 @@ description: Four books I read to survive my first year of consulting, reread fi
 image: img/posts/consulting-books.png
 ---
 
-![Hundreds of grey account cells, a magnifying glass, and ten picked out into a neat stack](img/posts/consulting-books.png)
+![A laptop showing a blank slide, a half-filled clock, and a stack of four books](img/posts/consulting-books.png)
 
 The books: [*Logical Writing*](https://www.yes24.com/Product/Goods/76899650) by Hanako Teruya, [*Fermi Estimation*](https://www.yes24.com/Product/Goods/5312935) by the Tokyo University Case Study Club, [*Hypothesis Thinking*](https://str.toyokeizai.net/en/books/9784492555552/) by Kazunari Uchida, and [*Say It with Charts*](https://www.amazon.com/Say-Charts-Executives-Visual-Communication/dp/007136997X) by Gene Zelazny. The first three are Japanese books I read in Korean translation.
 
