@@ -6,7 +6,7 @@
 - docs/writing/<slug>/       글 하나
 - docs/why/anthropic/, docs/why/palantir/   지원용 페이지 (메뉴에 없음, 검색 제외)
 """
-import html, re, shutil
+import html, json, re, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -103,7 +103,7 @@ def page(title, desc, body, prefix, lang="en", image=None, noindex=False, url=""
 
 def simple_shell(prefix, inner):
     return f'''<nav class="topbar simple" aria-label="Sections">
-  <a href="{prefix}">home</a><a href="{prefix}#work">work</a><a href="{prefix}writing/">writing</a><a href="{prefix}side/">side</a>
+  <a href="{prefix}">home</a><a href="{prefix}#work">work</a><a href="{prefix}writing/">writing</a><a href="{prefix}side/">side</a><a href="{prefix}map/">map</a>
 </nav>
 <main class="post-main">
 {inner}
@@ -117,8 +117,8 @@ def build_home(posts):
     posts = [p for p in posts if p.get("listed", "yes") != "no"]
     t = (CAREER / "build" / "page_parts.html").read_text()
     t = t.split("<!--BODY-->")[1].split("<!--/BODY-->")[0]
-    t = t.replace('<a href="#why">why-anthropic</a><a href="#work">work</a><a href="#side">side</a>', '<a href="#work">work</a><a href="writing/">writing</a><a href="side/">side</a>')
-    t = t.replace('<li><a href="#side">side/</a></li>\n      <li class="sub"><a href="#s-wedding">pre-wedding</a></li>\n      <li class="sub"><a href="#s-pauze">pauze-trip</a></li>', '<!--WRITING_TOC-->\n      <li><a href="side/">side/</a></li>')
+    t = t.replace('<a href="#why">why-anthropic</a><a href="#work">work</a><a href="#side">side</a>', '<a href="#work">work</a><a href="writing/">writing</a><a href="side/">side</a><a href="map/">map</a>')
+    t = t.replace('<li><a href="#side">side/</a></li>\n      <li class="sub"><a href="#s-wedding">pre-wedding</a></li>\n      <li class="sub"><a href="#s-pauze">pauze-trip</a></li>', '<!--WRITING_TOC-->\n      <li><a href="side/">side/</a></li>\n      <li><a href="map/">map</a></li>')
     t = t.replace('<li><a href="#why">why-anthropic<span class="t">.md</span></a></li>\n', '')
     t = t.replace('<!--WRITING_TOC-->', '<li><a href="writing/">writing/</a></li>' + "".join(
                       f'<li class="sub"><a href="writing/{p["slug"]}/">{html.escape(p["slug"])}</a></li>' for p in posts[:3]))
@@ -223,6 +223,76 @@ def build_side():
                                       simple_shell("../", inner), "../", url="side/"))
 
 
+MAP_NODES = [
+    ("work", "Profit driver alerts", "#w-margin", "Hypothesis thinking, Profitability, Data analysis, Decision support"),
+    ("work", "Customer lifetime value", "#w-clv", "Customer segmentation, Data modeling, Working with AI, Data analysis"),
+    ("work", "D2C lead time", "#w-d2c", "Process design, Data migration, E-commerce"),
+    ("work", "Shared AI context", "#w-context", "Working with AI, Structuring"),
+    ("side", "INVITO pre-wedding parties", "side/#s-wedding", "Demand testing, Working with AI, Community"),
+    ("side", "PAUZE TRIP", "side/#s-pauze", "Digital detox, Community, Outdoors"),
+]
+
+
+def build_map(posts):
+    nodes, links, kw = [], [], {}
+    def add(kind, label, url, tags):
+        i = len(nodes)
+        nodes.append({"id": i, "kind": kind, "label": label, "url": url})
+        for t in [x.strip() for x in tags.split(",") if x.strip()]:
+            if t not in kw:
+                kw[t] = len(nodes)
+                nodes.append({"id": kw[t], "kind": "tag", "label": t})
+            links.append({"source": i, "target": kw[t]})
+    for p in posts:
+        if p.get("listed", "yes") != "no" and p.get("tags"):
+            add("post", p.get("short", p["title"]), f'writing/{p["slug"]}/', p["tags"])
+    for kind, label, url, t in MAP_NODES:
+        add(kind, label, url, t)
+    deg = {}
+    for l in links:
+        deg[l["target"]] = deg.get(l["target"], 0) + 1
+    for n in nodes:
+        if n["kind"] == "tag":
+            n["deg"] = deg.get(n["id"], 1)
+    data = json.dumps({"nodes": nodes, "links": links}, ensure_ascii=False)
+    inner = f'''<section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
+<p>Every page on this site, linked by the ideas it shares. Larger keywords show up in more places. Hover to trace a thread, click a page to open it.</p>
+<div class="map-legend"><span class="mlg k-post">Writing</span><span class="mlg k-work">Work</span><span class="mlg k-side">Side projects</span><span class="mlg k-tag">Keyword</span></div></section>
+<div id="map" class="map-canvas" aria-label="Site map graph"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DATA={data};
+(function(){{
+const el=document.getElementById('map');const W=el.clientWidth,H=Math.max(620,Math.min(820,W*0.7));
+const css=getComputedStyle(document.documentElement);
+const col={{post:css.getPropertyValue('--accent').trim()||'#3446c4',work:'#2f8f6a',side:'#d9822b',tag:css.getPropertyValue('--ink-2').trim()||'#666'}};
+const svg=d3.select(el).append('svg').attr('viewBox',[0,0,W,H]).attr('width','100%').attr('height',H);
+const sim=d3.forceSimulation(DATA.nodes)
+ .force('link',d3.forceLink(DATA.links).id(d=>d.id).distance(95).strength(0.55))
+ .force('charge',d3.forceManyBody().strength(d=>d.kind==='tag'?-260:-900))
+ .force('center',d3.forceCenter(W/2,H/2)).force('x',d3.forceX(W/2).strength(0.03)).force('y',d3.forceY(H/2).strength(0.05))
+ .force('collide',d3.forceCollide(d=>d.kind==='tag'?26+d.deg*3:14+d.label.length*3.4));
+const link=svg.append('g').attr('class','m-links').selectAll('line').data(DATA.links).join('line');
+const node=svg.append('g').selectAll('g').data(DATA.nodes).join('g').attr('class',d=>'m-node '+d.kind)
+ .style('cursor',d=>d.url?'pointer':'default').on('click',(e,d)=>{{if(d.url)location.href='../'+d.url}});
+node.append('circle').attr('r',d=>d.kind==='tag'?4+d.deg*2:10).attr('fill',d=>d.kind==='tag'?'var(--bg)':col[d.kind]).attr('stroke',d=>d.kind==='tag'?col.tag:'none').attr('stroke-width',2);
+node.append('text').text(d=>d.label).attr('x',0).attr('y',d=>d.kind==='tag'?-(9+d.deg*2):26).attr('text-anchor','middle');
+const adj=new Set(DATA.links.map(l=>l.source.id+'-'+l.target.id));
+const near=(a,b)=>a===b||adj.has(a.id+'-'+b.id)||adj.has(b.id+'-'+a.id);
+node.on('mouseenter',(e,d)=>{{node.classed('dim',n=>!near(d,n));link.classed('hot',l=>l.source===d||l.target===d).classed('dim',l=>!(l.source===d||l.target===d))}})
+ .on('mouseleave',()=>{{node.classed('dim',false);link.classed('hot',false).classed('dim',false)}});
+node.call(d3.drag().on('start',(e,d)=>{{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y}})
+ .on('drag',(e,d)=>{{d.fx=e.x;d.fy=e.y}}).on('end',(e,d)=>{{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}}));
+sim.on('tick',()=>{{DATA.nodes.forEach(d=>{{d.x=Math.max(70,Math.min(W-70,d.x));d.y=Math.max(30,Math.min(H-30,d.y))}});
+ link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+ node.attr('transform',d=>`translate(${{d.x}},${{d.y}})`)}});
+}})();
+</script>'''
+    d = OUT / "map"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "index.html").write_text(page("Map · Soungwoo Lee", "A keyword map of Soungwoo Lee's work, writing and side projects.", simple_shell("../", inner), "../", url="map/"))
+
+
 def build_why():
     for name, src in [("anthropic", CAREER / "site" / "index.html"), ("palantir", CAREER / "site_palantir" / "index.html")]:
         t = src.read_text()
@@ -234,6 +304,19 @@ def build_why():
 
 
 POST_CSS = """
+/* map */
+.post-main:has(.map-canvas){max-width:1180px}
+.map-intro p{color:var(--ink-2);max-width:62ch}
+.map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.map-legend .mlg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.mlg.k-post::before{background:var(--accent)}.mlg.k-work::before{background:#2f8f6a}.mlg.k-side::before{background:#d9822b}.mlg.k-tag::before{background:var(--ink-2)}
+.map-canvas{margin-top:20px;border:1px solid var(--rule);border-radius:14px;background:var(--panel,transparent);overflow:hidden}
+.map-canvas line{stroke:var(--rule);stroke-width:1.4}
+.map-canvas line.hot{stroke:var(--accent);stroke-width:2.2}
+.map-canvas .dim{opacity:.18}
+.map-canvas text{font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.map-canvas .m-node.tag text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
+.map-canvas .m-node.post text,.map-canvas .m-node.work text,.map-canvas .m-node.side text{font-weight:600}
 /* writing */
 .post-main:has(.post-toc){max-width:1120px}
 .post-wrap{display:block}
@@ -284,6 +367,7 @@ def main():
     build_home(posts)
     build_writing(posts)
     build_side()
+    build_map(posts)
     build_why()
     print(f"built: {len(posts)} posts")
 

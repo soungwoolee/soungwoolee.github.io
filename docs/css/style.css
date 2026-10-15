@@ -412,6 +412,19 @@ footer { margin-top: 96px; border-top: 1px solid var(--rule); padding-top: 20px;
 .live-link{margin:-4px 0 12px;font-size:14px}
 .live-link a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
 
+/* map */
+.post-main:has(.map-canvas){max-width:1180px}
+.map-intro p{color:var(--ink-2);max-width:62ch}
+.map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.map-legend .mlg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.mlg.k-post::before{background:var(--accent)}.mlg.k-work::before{background:#2f8f6a}.mlg.k-side::before{background:#d9822b}.mlg.k-tag::before{background:var(--ink-2)}
+.map-canvas{margin-top:20px;border:1px solid var(--rule);border-radius:14px;background:var(--panel,transparent);overflow:hidden}
+.map-canvas line{stroke:var(--rule);stroke-width:1.4}
+.map-canvas line.hot{stroke:var(--accent);stroke-width:2.2}
+.map-canvas .dim{opacity:.18}
+.map-canvas text{font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.map-canvas .m-node.tag text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
+.map-canvas .m-node.post text,.map-canvas .m-node.work text,.map-canvas .m-node.side text{font-weight:600}
 /* writing */
 .post-main:has(.post-toc){max-width:1120px}
 .post-wrap{display:block}

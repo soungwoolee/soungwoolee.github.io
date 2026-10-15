@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Map · Soungwoo Lee</title>
+<meta name="description" content="A keyword map of Soungwoo Lee&#x27;s work, writing and side projects.">
+<meta property="og:title" content="Map · Soungwoo Lee">
+<meta property="og:description" content="A keyword map of Soungwoo Lee&#x27;s work, writing and side projects.">
+<meta property="og:url" content="https://soungwoolee.github.io/map/">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="topbar simple" aria-label="Sections">
+  <a href="../">home</a><a href="../#work">work</a><a href="../writing/">writing</a><a href="../side/">side</a><a href="../map/">map</a>
+</nav>
+<main class="post-main">
+<section class="col map-intro"><span class="eyebrow">map/</span><h2>How my work connects</h2>
+<p>Every page on this site, linked by the ideas it shares. Larger keywords show up in more places. Hover to trace a thread, click a page to open it.</p>
+<div class="map-legend"><span class="mlg k-post">Writing</span><span class="mlg k-work">Work</span><span class="mlg k-side">Side projects</span><span class="mlg k-tag">Keyword</span></div></section>
+<div id="map" class="map-canvas" aria-label="Site map graph"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DATA={"nodes": [{"id": 0, "kind": "post", "label": "\"Make it MECE\"", "url": "writing/mece/"}, {"id": 1, "kind": "tag", "label": "MECE", "deg": 2}, {"id": 2, "kind": "tag", "label": "Structuring", "deg": 3}, {"id": 3, "kind": "tag", "label": "Customer segmentation", "deg": 2}, {"id": 4, "kind": "post", "label": "Four consulting books", "url": "writing/consulting-books/"}, {"id": 5, "kind": "tag", "label": "Hypothesis thinking", "deg": 2}, {"id": 6, "kind": "tag", "label": "Storytelling with data", "deg": 1}, {"id": 7, "kind": "tag", "label": "Estimation", "deg": 1}, {"id": 8, "kind": "tag", "label": "Working with AI", "deg": 4}, {"id": 9, "kind": "tag", "label": "Book notes", "deg": 2}, {"id": 10, "kind": "post", "label": "Brain Accel notes", "url": "writing/brain-accel/"}, {"id": 11, "kind": "tag", "label": "Digital detox", "deg": 2}, {"id": 12, "kind": "tag", "label": "Attention", "deg": 1}, {"id": 13, "kind": "tag", "label": "Habits", "deg": 1}, {"id": 14, "kind": "work", "label": "Profit driver alerts", "url": "#w-margin"}, {"id": 15, "kind": "tag", "label": "Profitability", "deg": 1}, {"id": 16, "kind": "tag", "label": "Data analysis", "deg": 2}, {"id": 17, "kind": "tag", "label": "Decision support", "deg": 1}, {"id": 18, "kind": "work", "label": "Customer lifetime value", "url": "#w-clv"}, {"id": 19, "kind": "tag", "label": "Data modeling", "deg": 1}, {"id": 20, "kind": "work", "label": "D2C lead time", "url": "#w-d2c"}, {"id": 21, "kind": "tag", "label": "Process design", "deg": 1}, {"id": 22, "kind": "tag", "label": "Data migration", "deg": 1}, {"id": 23, "kind": "tag", "label": "E-commerce", "deg": 1}, {"id": 24, "kind": "work", "label": "Shared AI context", "url": "#w-context"}, {"id": 25, "kind": "side", "label": "INVITO pre-wedding parties", "url": "side/#s-wedding"}, {"id": 26, "kind": "tag", "label": "Demand testing", "deg": 1}, {"id": 27, "kind": "tag", "label": "Community", "deg": 2}, {"id": 28, "kind": "side", "label": "PAUZE TRIP", "url": "side/#s-pauze"}, {"id": 29, "kind": "tag", "label": "Outdoors", "deg": 1}], "links": [{"source": 0, "target": 1}, {"source": 0, "target": 2}, {"source": 0, "target": 3}, {"source": 4, "target": 5}, {"source": 4, "target": 1}, {"source": 4, "target": 2}, {"source": 4, "target": 6}, {"source": 4, "target": 7}, {"source": 4, "target": 8}, {"source": 4, "target": 9}, {"source": 10, "target": 11}, {"source": 10, "target": 12}, {"source": 10, "target": 13}, {"source": 10, "target": 9}, {"source": 14, "target": 5}, {"source": 14, "target": 15}, {"source": 14, "target": 16}, {"source": 14, "target": 17}, {"source": 18, "target": 3}, {"source": 18, "target": 19}, {"source": 18, "target": 8}, {"source": 18, "target": 16}, {"source": 20, "target": 21}, {"source": 20, "target": 22}, {"source": 20, "target": 23}, {"source": 24, "target": 8}, {"source": 24, "target": 2}, {"source": 25, "target": 26}, {"source": 25, "target": 8}, {"source": 25, "target": 27}, {"source": 28, "target": 11}, {"source": 28, "target": 27}, {"source": 28, "target": 29}]};
+(function(){
+const el=document.getElementById('map');const W=el.clientWidth,H=Math.max(620,Math.min(820,W*0.7));
+const css=getComputedStyle(document.documentElement);
+const col={post:css.getPropertyValue('--accent').trim()||'#3446c4',work:'#2f8f6a',side:'#d9822b',tag:css.getPropertyValue('--ink-2').trim()||'#666'};
+const svg=d3.select(el).append('svg').attr('viewBox',[0,0,W,H]).attr('width','100%').attr('height',H);
+const sim=d3.forceSimulation(DATA.nodes)
+ .force('link',d3.forceLink(DATA.links).id(d=>d.id).distance(95).strength(0.55))
+ .force('charge',d3.forceManyBody().strength(d=>d.kind==='tag'?-260:-900))
+ .force('center',d3.forceCenter(W/2,H/2)).force('x',d3.forceX(W/2).strength(0.03)).force('y',d3.forceY(H/2).strength(0.05))
+ .force('collide',d3.forceCollide(d=>d.kind==='tag'?26+d.deg*3:14+d.label.length*3.4));
+const link=svg.append('g').attr('class','m-links').selectAll('line').data(DATA.links).join('line');
+const node=svg.append('g').selectAll('g').data(DATA.nodes).join('g').attr('class',d=>'m-node '+d.kind)
+ .style('cursor',d=>d.url?'pointer':'default').on('click',(e,d)=>{if(d.url)location.href='../'+d.url});
+node.append('circle').attr('r',d=>d.kind==='tag'?4+d.deg*2:10).attr('fill',d=>d.kind==='tag'?'var(--bg)':col[d.kind]).attr('stroke',d=>d.kind==='tag'?col.tag:'none').attr('stroke-width',2);
+node.append('text').text(d=>d.label).attr('x',0).attr('y',d=>d.kind==='tag'?-(9+d.deg*2):26).attr('text-anchor','middle');
+const adj=new Set(DATA.links.map(l=>l.source.id+'-'+l.target.id));
+const near=(a,b)=>a===b||adj.has(a.id+'-'+b.id)||adj.has(b.id+'-'+a.id);
+node.on('mouseenter',(e,d)=>{node.classed('dim',n=>!near(d,n));link.classed('hot',l=>l.source===d||l.target===d).classed('dim',l=>!(l.source===d||l.target===d))})
+ .on('mouseleave',()=>{node.classed('dim',false);link.classed('hot',false).classed('dim',false)});
+node.call(d3.drag().on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y})
+ .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y}).on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}));
+sim.on('tick',()=>{DATA.nodes.forEach(d=>{d.x=Math.max(70,Math.min(W-70,d.x));d.y=Math.max(30,Math.min(H-30,d.y))});
+ link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+ node.attr('transform',d=>`translate(${d.x},${d.y})`)});
+})();
+</script>
+<footer class="post-foot"><a href="../">← Home</a><span>Soungwoo Lee</span></footer>
+</main>
+<script src="../js/app.js"></script>
+</body>
+</html>

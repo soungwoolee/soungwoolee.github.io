@@ -4,6 +4,8 @@ date: 2026-10-16
 lang: en
 description: Four books I read to survive my first year of consulting, reread five years in: what held up, the swamp of data without a hypothesis, and what's left once AI does the mechanics.
 image: img/posts/consulting-books.png
+tags: Hypothesis thinking, MECE, Structuring, Storytelling with data, Estimation, Working with AI, Book notes
+short: Four consulting books
 ---
 
 ![A laptop showing a blank slide, a half-filled clock, and a stack of four books](img/posts/consulting-books.png)

@@ -5,6 +5,8 @@ lang: en
 description: Notes on Brain Accel: why endless Shorts are a self-inflicted DDoS, what the brain does while you zone out, and a two-week plan to cut back.
 image: img/posts/brain-accel.png
 translation: brain-accel-ko
+tags: Digital detox, Attention, Habits, Book notes
+short: Brain Accel notes
 ---
 
 ![Left: a phone flooding a red brain with videos. Right: a calm blue brain sorting scattered pieces into neat stacks](img/posts/brain-accel.png)
